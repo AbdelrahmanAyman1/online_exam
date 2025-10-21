@@ -39,8 +39,8 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         hintText: hintText,
         labelText: labelText,
-        labelStyle: TextStyles.regular13,
-        hintStyle: TextStyles.regular14,
+        labelStyle: TextStyles.regular13.copyWith(color: AppColors.gray),
+        hintStyle: TextStyles.regular14.copyWith(color: AppColors.gray),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
           borderSide: BorderSide(color: AppColors.gray),
@@ -57,7 +57,6 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
           borderSide: BorderSide(color: AppColors.gray),
         ),
-        // label: Text(labelText, style: TextStyle(color: Colors.black)),
       ),
     );
   }
