@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 abstract class TextStyles {
-  static const TextStyle mediam20 = TextStyle(
+  static const TextStyle medium20 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
   );
-  static const TextStyle mediam16 = TextStyle(
+  static const TextStyle medium16 = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
-  static const TextStyle mediam18 = TextStyle(
+  static const TextStyle medium18 = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w500,
   );
