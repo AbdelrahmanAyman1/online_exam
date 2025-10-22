@@ -1,20 +1,20 @@
-const String baseSvgImagePath = 'assert/svg/';
-const String baseImagePath = 'assert/images/';
+const String baseSvgImagePath = 'assets/svg/';
+const String baseImagePath = 'assets/images/';
 
-abstract class AssertsSvg {
+abstract class AppAssets {
   static const String addIcon = '${baseSvgImagePath}add.svg';
   static const String addressIcon = '${baseSvgImagePath}address.svg';
   static const String alarmClockIcon = '${baseSvgImagePath}alarm-clock.svg';
-  static const String arrowBackIos = '${baseSvgImagePath}arrow-back_ios.svg';
+  static const String arrowBackIos = '${baseSvgImagePath}arrow_back_ios.svg';
   static const String carbonResultDraft =
-      '${baseSvgImagePath}carbon_result-draft.svg';
+      '${baseSvgImagePath}carbon_result_draft.svg';
   static const String categoryIcon = '${baseSvgImagePath}category.svg';
   static const String checkIcon = '${baseSvgImagePath}check.svg';
   static const String deleteIcon = '${baseSvgImagePath}delete.svg';
   static const String diamondIcon = '${baseSvgImagePath}Diamond.svg';
   static const String errorIcon = '${baseSvgImagePath}error.svg';
   static const String giftIcon = '${baseSvgImagePath}gift.svg';
-  static const String heartEyesIcon = '${baseSvgImagePath}Heart-eyes.svg';
+  static const String heartEyesIcon = '${baseSvgImagePath}Heart_eyes.svg';
   static const String homeOffIcon = '${baseSvgImagePath}home_off.svg';
   static const String homeOnIcon = '${baseSvgImagePath}home_on.svg';
   static const String locationIcon = '${baseSvgImagePath}location.svg';
