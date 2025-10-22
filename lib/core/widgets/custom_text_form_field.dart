@@ -39,23 +39,31 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         hintText: hintText,
         labelText: labelText,
-        labelStyle: TextStyles.regular13.copyWith(color: AppColors.gray),
-        hintStyle: TextStyles.regular14.copyWith(color: AppColors.gray),
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+
+        labelStyle: TextStyles.regular13.copyWith(color: AppColors.blackBase),
+        hintStyle: TextStyles.regular14.copyWith(color: AppColors.blackBase),
+        errorStyle: TextStyles.regular13.copyWith(color: AppColors.error),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(color: AppColors.gray),
+          borderSide: BorderSide(color: AppColors.blackBase),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(color: AppColors.error),
+
+          borderSide: BorderSide(
+            color: AppColors.error,
+            style: BorderStyle.solid,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(color: AppColors.gray),
+          borderSide: BorderSide(color: AppColors.blackBase),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
-          borderSide: BorderSide(color: AppColors.gray),
+          borderSide: BorderSide(color: AppColors.blackBase),
         ),
       ),
     );

@@ -11,28 +11,64 @@ class SingUpForm extends StatefulWidget {
 }
 
 class _SingUpFormState extends State<SingUpForm> {
-  GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
+  late GlobalKey<FormState> _formKey;
+  late TextEditingController _userNameController;
+  late TextEditingController _firstNameController;
+  late TextEditingController _lastNameController;
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController;
+  late TextEditingController _confirmPasswordController;
+  late TextEditingController _phoneNumberController;
+  @override
+  void initState() {
+    _formKey = GlobalKey<FormState>();
+    _userNameController = TextEditingController();
+    _firstNameController = TextEditingController();
+    _lastNameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
+    _phoneNumberController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    _phoneNumberController.dispose();
+    super.dispose();
+  }
+
+  void _singUpFormState() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Vaild")));
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("NotVaild")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
-        key: formKey,
+        key: _formKey,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CustomTextFormField(
               hintText: 'Enter your user name',
               labelText: 'User name',
               keyboardType: TextInputType.name,
-              controller: userNameController,
+              controller: _userNameController,
               validator: (value) => AppValidator.validateUsername(value),
             ),
             SizedBox(height: 10),
@@ -43,7 +79,7 @@ class _SingUpFormState extends State<SingUpForm> {
                     hintText: 'Enter first name',
                     labelText: 'First name',
                     keyboardType: TextInputType.name,
-                    controller: firstNameController,
+                    controller: _firstNameController,
                     validator: (value) => AppValidator.validateFirstName(value),
                   ),
                 ),
@@ -53,7 +89,7 @@ class _SingUpFormState extends State<SingUpForm> {
                     hintText: 'Enter last name',
                     labelText: 'Last name',
                     keyboardType: TextInputType.name,
-                    controller: lastNameController,
+                    controller: _lastNameController,
                     validator: (value) => AppValidator.validateLastName(value),
                   ),
                 ),
@@ -64,7 +100,7 @@ class _SingUpFormState extends State<SingUpForm> {
               hintText: 'Enter your user email',
               labelText: 'Email',
               keyboardType: TextInputType.emailAddress,
-              controller: emailController,
+              controller: _emailController,
               validator: (value) => AppValidator.validateEmail(value),
             ),
             SizedBox(height: 10),
@@ -75,7 +111,7 @@ class _SingUpFormState extends State<SingUpForm> {
                   child: CustomTextFormField(
                     hintText: 'Enter password',
                     labelText: 'Password',
-                    controller: passwordController,
+                    controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     validator: (value) => AppValidator.validatePassword(value),
@@ -86,12 +122,12 @@ class _SingUpFormState extends State<SingUpForm> {
                   child: CustomTextFormField(
                     hintText: 'Confirm password',
                     labelText: 'Confirm password',
-                    controller: confirmPasswordController,
+                    controller: _confirmPasswordController,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     validator: (value) => AppValidator.validateConfirmPassword(
                       value,
-                      passwordController.text,
+                      _passwordController.text,
                     ),
                   ),
                 ),
@@ -101,18 +137,14 @@ class _SingUpFormState extends State<SingUpForm> {
             CustomTextFormField(
               hintText: 'Enter phone number',
               labelText: 'Phone number',
-              controller: phoneNumberController,
+              controller: _phoneNumberController,
               keyboardType: TextInputType.phone,
               validator: (value) => AppValidator.validatePhone(value),
             ),
             SizedBox(height: 30),
             CustomElevatedButton(
               textOnButton: 'Sign up',
-              onPressed: () {
-                setState(() {
-                  if (formKey.currentState!.validate()) {}
-                });
-              },
+              onPressed: _singUpFormState,
             ),
           ],
         ),

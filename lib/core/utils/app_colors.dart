@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const Color success = Color(0xFF00FF00); // Green
-  static const Color error = Color(0xFFFF0000); // Red
+  static const Color error = Color(0xFFCC1010); // Red
   static const Color gray = Color(0xFF808080); // Gray
   static const Color white = Color(0xFFFFFFFF); // White
   static const Color lightBlue = Color(0xFFADD8E6); // Light blue
