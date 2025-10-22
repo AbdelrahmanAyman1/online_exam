@@ -39,7 +39,7 @@ class SignUpView extends StatelessWidget {
             SizedBox(height: 20),
             CreateAccountOrHaveAccountWidget(
               firstPartText: "Already have an account? ",
-              textButtonText: 'Sing Up',
+              textButtonText: 'Login',
               onTab: () => Navigator.pop(context),
             ),
           ],
