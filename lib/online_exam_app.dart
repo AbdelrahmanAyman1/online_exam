@@ -10,7 +10,7 @@ class OnlineExamApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.routeName,
+      initialRoute: ForgetPasswordView.routeName,
       routes: {
         SignUpView.routeName: (context) => const SignUpView(),
         LoginView.routeName: (context) => const LoginView(),
