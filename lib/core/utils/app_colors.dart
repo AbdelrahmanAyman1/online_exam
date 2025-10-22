@@ -13,7 +13,7 @@ abstract class AppColors {
   static const Color black = Color(0xFF000000); // Black
 
   // Blue shades
-  static const Color blueBase = Color(0xFF1E90FF); // Base blue
+  static const Color blueBase = Color(0xFF02369C); // Base blue
   static const Color blue10 = Color(0xFFD9E6FF); // Lightest blue
   static const Color blue20 = Color(0xFFB3C9FF); // Lighter blue
   static const Color blue30 = Color(0xFF8DACFF); // Light blue
@@ -27,7 +27,7 @@ abstract class AppColors {
   static const Color blue110 = Color(0xFF000080); // Deepest blue
 
   // Black shades
-  static const Color blackBase = Color(0xFF2F2F2F); // Base black
+  static const Color blackBase = Color(0xFF0F0F0F); // Base black
   static const Color black10 = Color(0xFFD3D3D3); // Lightest gray
   static const Color black20 = Color(0xFFB0B0B0); // Lighter gray
   static const Color black30 = Color(0xFF8D8D8D); // Light gray
