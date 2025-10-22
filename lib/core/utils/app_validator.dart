@@ -47,16 +47,25 @@ class AppValidator {
   }
 
   static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
+    final trimmed = value?.trim();
+
+    if (trimmed == null || trimmed.isEmpty) {
       return 'Please enter a password';
-    } else if (value.length < 6) {
-      return 'Password must be at least 6 characters';
-    } else if (!RegExp(
-      r'^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$',
-    ).hasMatch(value)) {
-      return 'Password must contain at least\none uppercase letter and one number';
     }
-    return null;
+
+    if (trimmed.length < 6) {
+      return 'Password must be at least 6 characters\nand contain uppercase letter\nnumber, and special character';
+    }
+
+    final hasUppercase = RegExp(r'[A-Z]').hasMatch(trimmed);
+    final hasDigit = RegExp(r'\d').hasMatch(trimmed);
+    final hasSpecial = RegExp(r'[@$!%*?&]').hasMatch(trimmed);
+
+    if (hasUppercase && hasDigit && hasSpecial) {
+      return null;
+    }
+
+    return 'Password must be at least 6 characters\nand contain uppercase letter\nnumber, and special character (@\$!%*?&)';
   }
 
   static String? validateConfirmPassword(
