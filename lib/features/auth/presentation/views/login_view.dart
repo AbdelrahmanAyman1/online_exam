@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/app_validator.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
