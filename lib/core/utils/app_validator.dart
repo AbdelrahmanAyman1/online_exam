@@ -8,7 +8,7 @@ class AppValidator {
       r'^[\p{L}\p{N}_]+$',
       unicode: true,
     ).hasMatch(value.trim())) {
-      return 'Username can only contain letters, numbers, and underscore';
+      return 'Username can only contain letters\nnumbers, and underscore';
     }
     return null;
   }
@@ -49,12 +49,12 @@ class AppValidator {
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter a password';
-    } else if (value.length < 8) {
-      return 'Password must be at least 8 characters';
+    } else if (value.length < 6) {
+      return 'Password must be at least 6 characters';
     } else if (!RegExp(
       r'^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]+$',
     ).hasMatch(value)) {
-      return 'Password must contain at least one uppercase letter and one number';
+      return 'Password must contain at least\none uppercase letter and one number';
     }
     return null;
   }
