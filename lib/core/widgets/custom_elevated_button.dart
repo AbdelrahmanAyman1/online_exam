@@ -19,7 +19,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.blueBase,
+        backgroundColor: AppColors.blue,
         disabledBackgroundColor: AppColors.gray,
 
         padding: const EdgeInsets.symmetric(vertical: 16.0),

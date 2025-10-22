@@ -18,25 +18,26 @@ class SignUpView extends StatelessWidget {
           style: TextStyles.medium20.copyWith(color: AppColors.blackBase),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SingUpForm(),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Already have an account?',
-                style: TextStyles.regular14.copyWith(color: AppColors.gray),
-              ),
-              CustomTextButton(
-                textButtonText: 'login',
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SingUpForm(),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Already have an account?',
+                  style: TextStyles.regular14.copyWith(color: AppColors.gray),
+                ),
+                CustomTextButton(
+                  textButtonText: 'login',
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ abstract class AppColors {
   static const Color lightGreen = Color(0xFF90EE90); // Light green
   static const Color lightRed = Color(0xFFFFC1CC); // Light red
   static const Color placeHolder = Color(0xFFB0B0B0); // Placeholder gray
-  static const Color blue = Color(0xFF0000FF); // Blue
+  static const Color blue = Color(0xFF02369C); // Blue
   static const Color black = Color(0xFF000000); // Black
 
   // Blue shades
