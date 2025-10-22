@@ -25,6 +25,7 @@ abstract class AppColors {
   static const Color blue90 = Color(0xFF0000E6); // Very dark blue
   static const Color blue100 = Color(0xFF0000B3); // Nearly black blue
   static const Color blue110 = Color(0xFF000080); // Deepest blue
+  static const Color textFieldBackgroundColor = Color(0xFFDFE7F7);
 
   // Black shades
   static const Color blackBase = Color(0xFF0F0F0F); // Base black
