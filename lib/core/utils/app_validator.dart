@@ -53,7 +53,7 @@ class AppValidator {
       return 'Please enter a password';
     }
 
-    if (trimmed.length < 6) {
+    if (trimmed.length < 8) {
       return 'Password must be at least 6 characters\nand contain uppercase letter\nnumber, and special character';
     }
 

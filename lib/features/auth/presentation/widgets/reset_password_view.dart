@@ -18,7 +18,7 @@ class ResetPassword extends StatelessWidget {
           SizedBox(height: 16),
           Text(
             maxLines: 3,
-            "Password must not be empty and must contain 6 characters with upper case letter and one \nnumber at least ",
+            "Password must not be empty and must contain 8 characters with upper case letter and one \nnumber at least ",
             textAlign: TextAlign.center,
             style: TextStyles.regular14.copyWith(color: AppColors.gray),
           ),
