@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
@@ -17,59 +16,55 @@ class _VerificationCodeState extends State<VerificationCode> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     Future.delayed(const Duration(seconds: 2), () {
-      //for testing 
+      //for testing
       widget.verify?.call();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 40,
-        ),
-        Text(
-          "Email verification",
-          style: TextStyles.medium18,
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Text(
-          "Please enter your code that send to your email address",
-          textAlign: TextAlign.center,
-          style: TextStyles.regular14.copyWith(color: AppColors.gray),
-        ),
-        SizedBox(
-          height: 32,
-        ),
-        OTP(),
-        SizedBox(
-          height: 48,
-        ),
-        _buildResendCode()
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 40),
+          Text("Email verification", style: TextStyles.medium18),
+          SizedBox(height: 16),
+          Text(
+            "Please enter your code that send to your email address",
+            textAlign: TextAlign.center,
+            style: TextStyles.regular14.copyWith(color: AppColors.gray),
+          ),
+          SizedBox(height: 32),
+          OTP(),
+          SizedBox(height: 48),
+          _buildResendCode(),
+        ],
+      ),
     );
   }
 
   Widget _buildResendCode() {
     return Align(
       alignment: Alignment.center,
-      child: Text.rich(TextSpan(style: TextStyles.medium16, children: [
+      child: Text.rich(
         TextSpan(
-            text: "Didn't receive code? ",
-            style: TextStyles.medium16.copyWith(
-              color: AppColors.blackBase,
-            )),
-        TextSpan(
-            text: "Resend",
-            style: TextStyles.medium16.copyWith(
-              color: AppColors.blueBase,
-              decoration: TextDecoration.underline,
-              decorationColor: AppColors.blueBase,
-            ))
-      ])),
+          style: TextStyles.medium16,
+          children: [
+            TextSpan(
+              text: "Didn't receive code? ",
+              style: TextStyles.medium16.copyWith(color: AppColors.blackBase),
+            ),
+            TextSpan(
+              text: "Resend",
+              style: TextStyles.medium16.copyWith(
+                color: AppColors.blueBase,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.blueBase,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -48,12 +48,13 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Password", style: TextStyles.medium20),
-      ),
+      appBar: AppBar(title: Text("Password", style: TextStyles.medium20)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
+
         child: PageView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+
           controller: _pageController,
           itemCount: _getPages.length,
           itemBuilder: (BuildContext context, int index) {
@@ -66,15 +67,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
 
   List<Widget> get _getPages {
     return [
-      ConfirmEmail(
-        onPressed: _confirmEmail,
-      ),
-      VerificationCode(
-        verify: _verificationCode,
-      ),
-      ResetPassword(
-        onPressed: _resetPassword,
-      ),
+      ConfirmEmail(onPressed: _confirmEmail),
+      VerificationCode(verify: _verificationCode),
+      ResetPassword(onPressed: _resetPassword),
     ];
   }
 }
