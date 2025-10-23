@@ -44,10 +44,7 @@ class CustomTextFormField extends StatelessWidget {
 
         labelStyle: TextStyles.regular13.copyWith(color: AppColors.blackBase),
         hintStyle: TextStyles.regular14.copyWith(color: AppColors.blackBase),
-        errorStyle: TextStyles.regular13.copyWith(
-          color: AppColors.error,
-          overflow: TextOverflow.clip,
-        ),
+        errorStyle: TextStyles.regular13.copyWith(color: AppColors.error),
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(4.0),
