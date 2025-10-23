@@ -10,5 +10,5 @@ class SignUpUsecase {
   SignUpUsecase(this._authRepo);
   Future<Result<SignUpResponseModel>> invoke(
     SignUpRequestModel signUpRequest,
-  ) => _authRepo.signUp(signUpRequest);
+  ) async => await _authRepo.signUp(signUpRequest);
 }

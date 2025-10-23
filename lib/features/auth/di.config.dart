@@ -21,7 +21,7 @@ import 'data/datasourse/online_data_sourse.dart' as _i691;
 import 'data/repo/auth_repo_imp.dart' as _i696;
 import 'domain/repo/auth_repo.dart' as _i818;
 import 'domain/usecase/sign_up_usecase.dart' as _i286;
-import 'presentation/view_model/view_model.dart' as _i531;
+import 'presentation/view_model/sign_up_cubit.dart' as _i409;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -31,17 +31,19 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final apiModule = _$ApiModule();
-    gh.singleton<_i332.ApiClient>(() => apiModule.provideApiClient());
     gh.singleton<_i361.BaseOptions>(() => apiModule.providerOption());
     gh.singleton<_i528.PrettyDioLogger>(() => apiModule.prvoideLogger());
-    gh.factory<_i691.OnLineDataSoures>(
-      () => _i178.OnlineDataSourseImpl(gh<_i332.ApiClient>()),
-    );
     gh.singleton<_i361.Dio>(
       () => apiModule.provideDio(
         gh<_i361.BaseOptions>(),
         gh<_i528.PrettyDioLogger>(),
       ),
+    );
+    gh.singleton<_i332.ApiClient>(
+      () => apiModule.provideApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i691.OnLineDataSoures>(
+      () => _i178.OnlineDataSourseImpl(gh<_i332.ApiClient>()),
     );
     gh.factory<_i818.AuthRepo>(
       () => _i696.AuthRepoImp(gh<_i691.OnLineDataSoures>()),
@@ -49,8 +51,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i286.SignUpUsecase>(
       () => _i286.SignUpUsecase(gh<_i818.AuthRepo>()),
     );
-    gh.factory<_i531.ViewModel>(
-      () => _i531.ViewModel(gh<_i286.SignUpUsecase>()),
+    gh.factory<_i409.SignUpCubit>(
+      () => _i409.SignUpCubit(signUpUsecase: gh<_i286.SignUpUsecase>()),
     );
     return this;
   }

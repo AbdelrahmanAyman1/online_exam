@@ -6,8 +6,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 @module
 abstract class ApiModule {
   @singleton
-  ApiClient provideApiClient() {
-    return ApiClient(Dio(), baseUrl: "https://exam.elevateegy.com/api/v1/");
+  ApiClient provideApiClient(Dio dio) {
+    return ApiClient(dio, baseUrl: "https://exam.elevateegy.com/api/v1/");
   }
 
   @singleton

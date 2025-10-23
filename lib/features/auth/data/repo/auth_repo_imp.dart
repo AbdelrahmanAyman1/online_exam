@@ -14,5 +14,5 @@ class AuthRepoImp implements AuthRepo {
   @override
   Future<Result<SignUpResponseModel>> signUp(
     SignUpRequestModel signUpRequestModel,
-  ) => _dataSourse.signUp(signUpRequestModel);
+  ) async => await _dataSourse.signUp(signUpRequestModel);
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/core/utils/app_validator.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
 import 'package:online_exam/core/widgets/custom_text_form_field.dart';
+import 'package:online_exam/features/auth/presentation/view_model/sign_up_cubit.dart';
 
 class SingUpForm extends StatefulWidget {
   const SingUpForm({super.key});
@@ -46,13 +48,15 @@ class _SingUpFormState extends State<SingUpForm> {
 
   void _singUpFormState() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Vaild")));
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("NotVaild")));
+      context.read<SignUpCubit>().signUp(
+        userName: _userNameController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        rePassword: _confirmPasswordController.text,
+        phone: _phoneNumberController.text,
+      );
     }
   }
 
