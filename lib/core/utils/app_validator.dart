@@ -54,7 +54,7 @@ class AppValidator {
     }
 
     if (trimmed.length < 8) {
-      return 'Password must be\nat least 6 characters\nand contain uppercase\nletter number,\nand special character';
+      return 'Password must be\nat least 8 characters\nand contain uppercase\nletter number,\nand special character';
     }
 
     final hasUppercase = RegExp(r'[A-Z]').hasMatch(trimmed);
@@ -65,7 +65,7 @@ class AppValidator {
       return null;
     }
 
-    return 'Password must be\nat least 6 characters\nand contain uppercase\nletter number,\nand special character\n(@\$!%*?&)';
+    return 'Password must be\nat least 8 characters\nand contain uppercase\nletter number,\nand special character\n(@\$!%*?&)';
   }
 
   static String? validateConfirmPassword(
