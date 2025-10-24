@@ -9,4 +9,6 @@ abstract class AuthRepo {
   );
 
   Future<Result<AuthResponseModel>> signIn(LoginRequestModel loginRequestModel);
+
+  Future<Result<AuthResponseModel>> forgotPassword(String email);
 }
