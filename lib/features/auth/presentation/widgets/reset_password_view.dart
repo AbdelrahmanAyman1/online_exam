@@ -23,14 +23,11 @@ class ResetPassword extends StatelessWidget {
             style: TextStyles.regular14.copyWith(color: AppColors.gray),
           ),
           SizedBox(height: 32),
-          CustomTextFormField(
-            labelText: "Enter your new password",
-            hintText: "New password",
-          ),
+          CustomTextFormField(labelText: "Email", hintText: "Enter your email"),
           SizedBox(height: 24),
           CustomTextFormField(
-            labelText: "Confirm password",
-            hintText: "Confirm password",
+            labelText: "Password",
+            hintText: "Enter your password",
           ),
           SizedBox(height: 48),
           CustomElevatedButton(textOnButton: "Continue", onPressed: onPressed),
