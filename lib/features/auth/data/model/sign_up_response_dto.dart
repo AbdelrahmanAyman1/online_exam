@@ -16,8 +16,8 @@ class SignUpResponseDto {
 
   Map<String, dynamic> toJson() => _$SignUpResponseDtoToJson(this);
 
-  SignUpResponseModel toModel() {
-    return SignUpResponseModel(
+  AuthResponseModel toModel() {
+    return AuthResponseModel(
       message: message,
       token: token,
       user: user?.userModel(),

@@ -5,7 +5,7 @@ sealed class SignUpState {}
 class SignUpInitialState extends SignUpState {}
 
 class SignUpSuccessState extends SignUpState {
-  final SignUpResponseModel signUpResponseModel;
+  final AuthResponseModel signUpResponseModel;
 
   SignUpSuccessState(this.signUpResponseModel);
 }

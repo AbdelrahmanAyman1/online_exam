@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/core/utils/app_validator.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
 import 'package:online_exam/core/widgets/custom_text_form_field.dart';
-import 'package:online_exam/features/auth/presentation/view_model/sign_up_cubit.dart';
+import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_model/sign_up_cubit.dart';
 
 class SingUpForm extends StatefulWidget {
   const SingUpForm({super.key});
