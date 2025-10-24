@@ -24,7 +24,12 @@ class OnlineExamApp extends StatelessWidget {
           create: (context) => GetIt.instance.get<LoginCubit>(),
           child: const LoginView(),
         ),
-        ForgetPasswordView.routeName: (context) => const ForgetPasswordView(),
+        ForgetPasswordView.routeName: (context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => GetIt.instance.get<LoginCubit>()),
+          ],
+          child: const ForgetPasswordView(),
+        ),
       },
     );
   }

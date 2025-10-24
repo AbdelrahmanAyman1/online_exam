@@ -39,7 +39,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         emit(SignUpSuccessState(result.data));
 
       case Failure<AuthResponseModel>():
-        emit(SignUpFailureState(result.expection));
+        emit(SignUpFailureState(result.exception));
     }
   }
 }
