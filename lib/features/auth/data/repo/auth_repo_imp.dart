@@ -23,4 +23,10 @@ class AuthRepoImp implements AuthRepo {
   ) async {
     return await _dataSourse.signIn(loginRequestModel);
   }
+
+  @override
+  Future<Result<AuthResponseModel>> forgotPassword(String email) {
+    // TODO: implement forgotPassword
+    throw UnimplementedError();
+  }
 }
