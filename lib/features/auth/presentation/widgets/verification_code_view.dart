@@ -13,14 +13,13 @@ class VerificationCode extends StatefulWidget {
 
 class _VerificationCodeState extends State<VerificationCode> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Future.delayed(const Duration(seconds: 2), () {
-      //for testing
-      widget.verify?.call();
-    });
-  }
-
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   Future.delayed(const Duration(seconds: 2), () {
+  //     //for testing
+  //     widget.verify?.call();
+  //   });
+  // }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

@@ -3,17 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 
 class OTPTextFormField extends StatelessWidget {
-  const OTPTextFormField({
-    super.key,
-    this.index,
-  });
+  const OTPTextFormField({super.key, this.index});
 
   final int? index;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
-      width: 70,
+      height: 55,
+      width: 45,
       child: TextFormField(
         autofocus: true,
         textAlign: TextAlign.center,
@@ -36,8 +33,9 @@ class OTPTextFormField extends StatelessWidget {
 
   InputDecoration _buildInputDecoration() {
     return InputDecoration(
-        fillColor: AppColors.textFieldBackgroundColor,
-        filled: true,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)));
+      fillColor: AppColors.textFieldBackgroundColor,
+      filled: true,
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+    );
   }
 }
