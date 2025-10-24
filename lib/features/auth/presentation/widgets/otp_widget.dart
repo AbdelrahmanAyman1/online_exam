@@ -8,11 +8,7 @@ class OTP extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: List.generate(
-          4,
-          (index) => OTPTextFormField(
-                index: index,
-              )),
+      children: List.generate(6, (index) => OTPTextFormField(index: index)),
     );
   }
 }
