@@ -50,11 +50,11 @@ class AppValidator {
     final trimmed = value?.trim();
 
     if (trimmed == null || trimmed.isEmpty) {
-      return 'Please enter a password';
+      return 'Please enter password';
     }
 
-    if (trimmed.length < 6) {
-      return 'Password must be at least 6 characters\nand contain uppercase letter\nnumber, and special character';
+    if (trimmed.length < 8) {
+      return 'Password must be\nat least 8 characters\nand contain uppercase\nletter number,\nand special character';
     }
 
     final hasUppercase = RegExp(r'[A-Z]').hasMatch(trimmed);
@@ -65,7 +65,7 @@ class AppValidator {
       return null;
     }
 
-    return 'Password must be at least 6 characters\nand contain uppercase letter\nnumber, and special character (@\$!%*?&)';
+    return 'Password must be\nat least 8 characters\nand contain uppercase\nletter number,\nand special character\n(@\$!%*?&)';
   }
 
   static String? validateConfirmPassword(
@@ -73,9 +73,9 @@ class AppValidator {
     String originalPassword,
   ) {
     if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
+      return 'Please confirm password';
     } else if (value != originalPassword) {
-      return 'Passwords do not match';
+      return 'Passwords don\'t match';
     }
     return null;
   }

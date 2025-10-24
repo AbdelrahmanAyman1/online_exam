@@ -4,7 +4,7 @@ import 'package:online_exam/core/utils/result.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 import 'package:online_exam/features/auth/domain/usecase/sign_up_usecase.dart';
-import 'package:online_exam/features/auth/presentation/view_model/sign_up_state.dart';
+import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_model/sign_up_state.dart';
 
 @injectable
 class SignUpCubit extends Cubit<SignUpState> {
@@ -35,10 +35,10 @@ class SignUpCubit extends Cubit<SignUpState> {
 
     var result = await signUpUsecase.invoke(signUpRequestModel);
     switch (result) {
-      case Success<SignUpResponseModel>():
+      case Success<AuthResponseModel>():
         emit(SignUpSuccessState(result.data));
 
-      case Failure<SignUpResponseModel>():
+      case Failure<AuthResponseModel>():
         emit(SignUpFailureState(result.expection));
     }
   }
