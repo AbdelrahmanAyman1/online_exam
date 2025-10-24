@@ -32,4 +32,10 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
       return response.toModel();
     });
   }
+
+  @override
+  Future<Result<AuthResponseModel>> forgetPassword(String email) {
+    // TODO: implement forgetPassword
+    throw UnimplementedError();
+  }
 }

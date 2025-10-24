@@ -9,4 +9,6 @@ abstract class OnLineDataSoures {
   );
 
   Future<Result<AuthResponseModel>> signIn(LoginRequestModel loginRequestModel);
+
+  Future<Result<AuthResponseModel>> forgetPassword(String email);
 }

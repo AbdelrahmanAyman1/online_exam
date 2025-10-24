@@ -16,4 +16,7 @@ abstract class ApiClient {
 
   @POST('auth/signin')
   Future<SignUpResponseDto> signIn(@Body() LoginRequestModel loginRequestModel);
+
+  @POST('auth/forgotPassword')
+  Future<SignUpResponseDto> forgetPassword(@Body() String email);
 }

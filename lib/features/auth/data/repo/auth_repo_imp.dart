@@ -25,8 +25,7 @@ class AuthRepoImp implements AuthRepo {
   }
 
   @override
-  Future<Result<AuthResponseModel>> forgotPassword(String email) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<Result<AuthResponseModel>> forgotPassword(String email) async {
+    return await _dataSourse.forgetPassword(email);
   }
 }
