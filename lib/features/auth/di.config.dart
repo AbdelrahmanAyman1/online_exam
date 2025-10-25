@@ -28,6 +28,8 @@ import 'presentation/view_model/forget_password_view_model/forget_password_cubit
     as _i201;
 import 'presentation/view_model/login_view_model/login_cubit.dart' as _i423;
 import 'presentation/view_model/sign_up_view_model/sign_up_cubit.dart' as _i251;
+import 'presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart'
+    as _i563;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -68,6 +70,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i286.SignUpUsecase>(
       () => _i286.SignUpUsecase(gh<_i818.AuthRepo>()),
+    );
+    gh.factory<_i563.VerifyResetCodeCubit>(
+      () => _i563.VerifyResetCodeCubit(gh<_i782.VerifyResetCodeUseCase>()),
     );
     gh.factory<_i251.SignUpCubit>(
       () => _i251.SignUpCubit(signUpUsecase: gh<_i286.SignUpUsecase>()),
