@@ -6,6 +6,7 @@ import 'package:online_exam/features/auth/data/datasourse/online_data_sourse.dar
 import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart';
 import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
+import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 
 @Injectable(as: OnLineDataSoures)
@@ -41,6 +42,18 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
     return excuteApi<AuthResponseModel>(() async {
       var response = await _apiClient.forgetPassword(
         forgetPasswordRequestModel,
+      );
+      return response.toModel();
+    });
+  }
+
+  @override
+  Future<Result<AuthResponseModel>> verifyResetCode(
+    VerifyResetCodeRequestModel verifyResetCodeRequestModel,
+  ) async {
+    return excuteApi<AuthResponseModel>(() async {
+      var response = await _apiClient.verifyResetCode(
+        verifyResetCodeRequestModel,
       );
       return response.toModel();
     });
