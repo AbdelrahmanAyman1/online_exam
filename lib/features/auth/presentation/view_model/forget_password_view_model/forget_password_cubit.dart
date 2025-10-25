@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/utils/result.dart';
 import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart';
-import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/domain/usecase/forget_password_usecase.dart';
 import 'package:online_exam/features/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
 
