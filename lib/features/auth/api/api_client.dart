@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart';
 import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:retrofit/retrofit.dart';
@@ -18,5 +19,7 @@ abstract class ApiClient {
   Future<SignUpResponseDto> signIn(@Body() LoginRequestModel loginRequestModel);
 
   @POST('auth/forgotPassword')
-  Future<SignUpResponseDto> forgetPassword(@Body() String email);
+  Future<SignUpResponseDto> forgetPassword(
+    @Body() ForgetPasswordRequestModel forgetPasswordRequestModel,
+  );
 }

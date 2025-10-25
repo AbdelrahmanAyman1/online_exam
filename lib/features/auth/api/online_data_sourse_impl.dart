@@ -3,6 +3,7 @@ import 'package:online_exam/core/utils/api_utilts.dart';
 import 'package:online_exam/core/utils/result.dart';
 import 'package:online_exam/features/auth/api/api_client.dart';
 import 'package:online_exam/features/auth/data/datasourse/online_data_sourse.dart';
+import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart';
 import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
@@ -34,8 +35,14 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   }
 
   @override
-  Future<Result<AuthResponseModel>> forgetPassword(String email) {
-    // TODO: implement forgetPassword
-    throw UnimplementedError();
+  Future<Result<AuthResponseModel>> forgetPassword(
+    ForgetPasswordRequestModel forgetPasswordRequestModel,
+  ) async {
+    return excuteApi<AuthResponseModel>(() async {
+      var response = await _apiClient.forgetPassword(
+        forgetPasswordRequestModel,
+      );
+      return response.toModel();
+    });
   }
 }

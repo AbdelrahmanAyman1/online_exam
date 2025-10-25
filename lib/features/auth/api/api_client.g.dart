@@ -80,11 +80,14 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<SignUpResponseDto> forgetPassword(String email) async {
+  Future<SignUpResponseDto> forgetPassword(
+    ForgetPasswordRequestModel forgetPasswordRequestModel,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = email;
+    final _data = <String, dynamic>{};
+    _data.addAll(forgetPasswordRequestModel.toJson());
     final _options = _setStreamType<SignUpResponseDto>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

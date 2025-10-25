@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:online_exam/features/auth/presentation/view_model/forget_password_view_model/forget_password_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/login_view_model/login_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_model/sign_up_cubit.dart';
 import 'package:online_exam/features/auth/presentation/views/forget_password_view.dart';
@@ -26,7 +27,9 @@ class OnlineExamApp extends StatelessWidget {
         ),
         ForgetPasswordView.routeName: (context) => MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => GetIt.instance.get<LoginCubit>()),
+            BlocProvider(
+              create: (context) => GetIt.instance.get<ForgetPasswordCubit>(),
+            ),
           ],
           child: const ForgetPasswordView(),
         ),
