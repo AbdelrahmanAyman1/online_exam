@@ -8,7 +8,6 @@ import 'package:online_exam/features/auth/presentation/view_model/verify_reset_c
 import 'package:online_exam/features/auth/presentation/views/forget_password_view.dart';
 import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
-import 'package:online_exam/features/auth/presentation/widgets/verification_code_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});

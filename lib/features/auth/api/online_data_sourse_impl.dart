@@ -5,6 +5,7 @@ import 'package:online_exam/features/auth/api/api_client.dart';
 import 'package:online_exam/features/auth/data/datasourse/online_data_sourse.dart';
 import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart';
 import 'package:online_exam/features/auth/data/model/login_request_model.dart';
+import 'package:online_exam/features/auth/data/model/reset_password_request.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
@@ -55,6 +56,16 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
       var response = await _apiClient.verifyResetCode(
         verifyResetCodeRequestModel,
       );
+      return response.toModel();
+    });
+  }
+
+  @override
+  Future<Result<AuthResponseModel>> resetPassword(
+    ResetPasswordRequest resetPasswordRequest,
+  ) async {
+    return excuteApi<AuthResponseModel>(() async {
+      var response = await _apiClient.resetPassword(resetPasswordRequest);
       return response.toModel();
     });
   }
