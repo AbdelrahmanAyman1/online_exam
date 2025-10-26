@@ -3,10 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/features/auth/presentation/view_model/forget_password_view_model/forget_password_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/forget_password_view_model/forget_password_state.dart';
+import 'package:online_exam/features/auth/presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart';
 import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/confirm_email_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/reset_password_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/verification_code_view.dart';
+
+import '../view_model/verify_reset_code_view_model/verify_reset_code_state.dart';
 
 class ForgetPasswordView extends StatefulWidget {
   static const String routeName = "fogrgetView";
@@ -40,10 +43,6 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
       context.read<ForgetPasswordCubit>().forgetPassword(
         email: _emailController.text,
       );
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("OTP sent to your email")));
@@ -54,12 +53,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
     }
   }
 
-  void _verificationCode() {
-    _pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeIn,
-    );
-  }
+  // void _verificationCode() {
+  //   _pageController.nextPage(
+  //     duration: const Duration(milliseconds: 300),
+  //     curve: Curves.easeIn,
+  //   );
+  // }
 
   void _resetPassword() {
     Navigator.of(context).pushReplacementNamed(LoginView.routeName);
@@ -71,12 +70,38 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
       appBar: AppBar(title: Text("Password", style: TextStyles.medium20)),
       body: MultiBlocListener(
         listeners: [
+          BlocListener<VerifyResetCodeCubit, VerifyResetCodeState>(
+            listener: (context, state) {
+              if (state is VerifyResetCodeSuccessState) {
+                _pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              } else if (state is VerifyResetCodeFailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Error: ${state.exception.toString()}"),
+                  ),
+                );
+              }
+            },
+          ),
           BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
             listener: (context, state) {
               if (state is ForgetPasswordSuccessState) {
                 _pageController.nextPage(
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeIn,
+                );
+                _pageController.nextPage(
+                  duration: Duration(microseconds: 300),
+                  curve: Curves.easeIn,
+                );
+              } else if (state is ForgetPasswordFailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Error: ${state.exception.toString()}"),
+                  ),
                 );
               }
             },
@@ -106,7 +131,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
         emailController: _emailController,
         formKey: _formKey,
       ),
-      VerificationCode(verify: _verificationCode),
+      VerificationCode(pageController: _pageController),
       ResetPassword(onPressed: _resetPassword),
     ];
   }

@@ -4,14 +4,27 @@ import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/features/auth/presentation/widgets/otp_widget.dart';
 
 class VerificationCode extends StatefulWidget {
-  const VerificationCode({super.key, this.verify});
-  final Function()? verify;
+  const VerificationCode({super.key, required this.pageController});
+  final PageController pageController;
 
   @override
   State<VerificationCode> createState() => _VerificationCodeState();
 }
 
 class _VerificationCodeState extends State<VerificationCode> {
+  final List<TextEditingController> controllers = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
+  final formKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    for (var controller in controllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   // void didChangeDependencies() {
   //   super.didChangeDependencies();
@@ -23,21 +36,24 @@ class _VerificationCodeState extends State<VerificationCode> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 40),
-          Text("Email verification", style: TextStyles.medium18),
-          SizedBox(height: 16),
-          Text(
-            "Please enter your code that send to your email address",
-            textAlign: TextAlign.center,
-            style: TextStyles.regular14.copyWith(color: AppColors.gray),
-          ),
-          SizedBox(height: 32),
-          OTP(),
-          SizedBox(height: 48),
-          _buildResendCode(),
-        ],
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            SizedBox(height: 40),
+            Text("Email verification", style: TextStyles.medium18),
+            SizedBox(height: 16),
+            Text(
+              "Please enter your code that send to your email address",
+              textAlign: TextAlign.center,
+              style: TextStyles.regular14.copyWith(color: AppColors.gray),
+            ),
+            SizedBox(height: 32),
+            OTP(controller: controllers),
+            SizedBox(height: 48),
+            _buildResendCode(),
+          ],
+        ),
       ),
     );
   }
