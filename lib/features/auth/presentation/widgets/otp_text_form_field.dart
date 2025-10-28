@@ -3,9 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 
 class OTPTextFormField extends StatelessWidget {
-  const OTPTextFormField({super.key, this.index});
+  const OTPTextFormField({
+    super.key,
+    this.index,
+    this.onComplete,
+    this.controller,
+  });
 
   final int? index;
+  final TextEditingController? controller;
+  final void Function()? onComplete;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -14,11 +21,14 @@ class OTPTextFormField extends StatelessWidget {
       child: TextFormField(
         autofocus: true,
         textAlign: TextAlign.center,
+        controller: controller,
         onChanged: (value) {
-          if (value.length == 1 && index != 3) {
+          if (value.length == 1 && index != 5) {
             FocusScope.of(context).nextFocus();
-          } else {
-            FocusScope.of(context).unfocus();
+          } else if (value.isEmpty && index != 0) {
+            FocusScope.of(context).previousFocus();
+          } else if (value.length == 1 && index == 5) {
+            onComplete?.call();
           }
         },
         decoration: _buildInputDecoration(),

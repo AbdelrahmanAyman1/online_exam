@@ -5,38 +5,23 @@ import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
 import 'package:online_exam/core/widgets/custom_text_form_field.dart';
 
-class ResetPassword extends StatefulWidget {
-  const ResetPassword({super.key, this.onPressed});
+class ResetPassword extends StatelessWidget {
+  const ResetPassword({
+    super.key,
+    this.onPressed,
+    required this.emailController,
+    required this.passwordController,
+    required this.formKey,
+  });
   final Function()? onPressed;
-
-  @override
-  State<ResetPassword> createState() => _ResetPasswordState();
-}
-
-class _ResetPasswordState extends State<ResetPassword> {
-  late GlobalKey _formKey;
-  late TextEditingController _emailController;
-  late TextEditingController _passwordController;
-  @override
-  void initState() {
-    _formKey = GlobalKey<FormState>();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
+  final TextEditingController emailController;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController passwordController;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: Column(
           children: [
             SizedBox(height: 40),
@@ -54,21 +39,21 @@ class _ResetPasswordState extends State<ResetPassword> {
               hintText: "Enter your email",
               validator: (value) => AppValidator.validateEmail(value),
               keyboardType: TextInputType.emailAddress,
-              controller: _emailController,
+              controller: emailController,
             ),
             SizedBox(height: 24),
             CustomTextFormField(
-              labelText: "Password",
-              hintText: "Enter your password",
+              labelText: "New Password",
+              hintText: "Enter new password",
               obscureText: true,
               validator: (value) => AppValidator.validatePassword(value),
               keyboardType: TextInputType.visiblePassword,
-              controller: _passwordController,
+              controller: passwordController,
             ),
             SizedBox(height: 48),
             CustomElevatedButton(
               textOnButton: "Continue",
-              onPressed: widget.onPressed,
+              onPressed: onPressed,
             ),
           ],
         ),
