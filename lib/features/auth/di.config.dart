@@ -20,10 +20,19 @@ import 'api/online_data_sourse_impl.dart' as _i178;
 import 'data/datasourse/online_data_sourse.dart' as _i691;
 import 'data/repo/auth_repo_imp.dart' as _i696;
 import 'domain/repo/auth_repo.dart' as _i818;
+import 'domain/usecase/forget_password_usecase.dart' as _i150;
 import 'domain/usecase/login_use_case.dart' as _i839;
+import 'domain/usecase/reset_password_use_case.dart' as _i252;
 import 'domain/usecase/sign_up_usecase.dart' as _i286;
+import 'domain/usecase/verify_reset_code_use_case.dart' as _i782;
+import 'presentation/view_model/forget_password_view_model/forget_password_cubit.dart'
+    as _i201;
 import 'presentation/view_model/login_view_model/login_cubit.dart' as _i423;
+import 'presentation/view_model/reset_password_view_model/reset_password_cubit.dart'
+    as _i132;
 import 'presentation/view_model/sign_up_view_model/sign_up_cubit.dart' as _i251;
+import 'presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart'
+    as _i563;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -53,8 +62,26 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i839.LoginUseCase>(
       () => _i839.LoginUseCase(gh<_i818.AuthRepo>()),
     );
+    gh.factory<_i150.ForgetPasswordUseCase>(
+      () => _i150.ForgetPasswordUseCase(gh<_i818.AuthRepo>()),
+    );
+    gh.factory<_i782.VerifyResetCodeUseCase>(
+      () => _i782.VerifyResetCodeUseCase(gh<_i818.AuthRepo>()),
+    );
+    gh.factory<_i252.ResetPasswordUseCase>(
+      () => _i252.ResetPasswordUseCase(gh<_i818.AuthRepo>()),
+    );
+    gh.factory<_i132.ResetPasswordCubit>(
+      () => _i132.ResetPasswordCubit(gh<_i252.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i201.ForgetPasswordCubit>(
+      () => _i201.ForgetPasswordCubit(gh<_i150.ForgetPasswordUseCase>()),
+    );
     gh.factory<_i286.SignUpUsecase>(
       () => _i286.SignUpUsecase(gh<_i818.AuthRepo>()),
+    );
+    gh.factory<_i563.VerifyResetCodeCubit>(
+      () => _i563.VerifyResetCodeCubit(gh<_i782.VerifyResetCodeUseCase>()),
     );
     gh.factory<_i251.SignUpCubit>(
       () => _i251.SignUpCubit(signUpUsecase: gh<_i286.SignUpUsecase>()),
