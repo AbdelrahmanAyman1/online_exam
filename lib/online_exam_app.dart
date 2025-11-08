@@ -6,6 +6,7 @@ import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_m
 import 'package:online_exam/features/auth/presentation/views/forget_password_view.dart';
 import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
+import 'package:online_exam/features/home/presentation/view/home_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
@@ -14,7 +15,7 @@ class OnlineExamApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.routeName,
+      initialRoute: HomeView.routeName,
       routes: {
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
@@ -24,6 +25,7 @@ class OnlineExamApp extends StatelessWidget {
           create: (context) => GetIt.instance.get<LoginCubit>(),
           child: const LoginView(),
         ),
+        HomeView.routeName: (context) => const HomeView(),
         ForgetPasswordView.routeName: (context) => const ForgetPasswordView(),
       },
     );
