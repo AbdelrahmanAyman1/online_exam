@@ -4,11 +4,13 @@ import 'package:online_exam/core/utils/app_validator.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
 import 'package:online_exam/core/widgets/custom_text_form_field.dart';
+import 'package:online_exam/core/utils/app_toast.dart';
 import 'package:online_exam/features/auth/presentation/view_model/login_view_model/login_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/login_view_model/login_state.dart';
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/create_account_or_have_account_widget.dart';
 import 'package:online_exam/features/auth/presentation/widgets/remember_me_and_forget_widget.dart';
+import 'package:online_exam/features/home/presentation/view/home_view.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "LoginView";
@@ -37,13 +39,6 @@ class _LoginViewState extends State<LoginView> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("success")));
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Error")));
     }
   }
 
@@ -55,16 +50,22 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
+              Toast.showLoading(
+                context: context,
+                isLoading: state is LoginLoadingState,
+              );
               if (state is LoginSuccessState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(state.authResponseModel.message ?? ""),
-                  ),
+                Toast.showToast(
+                  context: context,
+                  msg: state.authResponseModel.message ?? "Login successful",
                 );
+                Navigator.of(context).pushReplacementNamed(HomeView.routeName);
               }
               if (state is LoginFailureState) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.exception.toString())),
+                Toast.showToast(
+                  context: context,
+                    msg: state.errorMessage ?? "Login failed",
+                  backgroundColor: Colors.red,
                 );
               }
             },

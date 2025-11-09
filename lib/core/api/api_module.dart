@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/features/auth/api/api_client.dart';
+import 'package:online_exam/core/api/api_client.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @module
@@ -24,6 +24,7 @@ abstract class ApiModule {
     return BaseOptions(
       sendTimeout: Duration(seconds: 60),
       receiveTimeout: Duration(seconds: 60),
+      validateStatus: (status) => status != null && status < 500,
     );
   }
 

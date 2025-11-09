@@ -11,9 +11,9 @@ class SignUpSuccessState extends SignUpState {
 }
 
 class SignUpFailureState extends SignUpState {
-  final Exception exception;
+  final String ?errorMessage;
 
-  SignUpFailureState(this.exception);
+  SignUpFailureState(this.errorMessage);
 }
 
 class SignUpLoadingState extends SignUpState {}

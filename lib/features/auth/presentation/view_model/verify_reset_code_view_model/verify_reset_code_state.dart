@@ -13,7 +13,7 @@ class VerifyResetCodeSuccessState extends VerifyResetCodeState {
 }
 
 class VerifyResetCodeFailureState extends VerifyResetCodeState {
-  Exception exception;
+  final String? errorMessage;
 
-  VerifyResetCodeFailureState(this.exception);
+  VerifyResetCodeFailureState(this.errorMessage);
 }

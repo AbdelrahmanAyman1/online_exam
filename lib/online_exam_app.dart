@@ -18,8 +18,9 @@ class OnlineExamApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeView.routeName,
+      initialRoute: LoginView.routeName,
       routes: {
+        HomeView.routeName: (context) => const HomeView(),
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
           child: const SignUpView(),

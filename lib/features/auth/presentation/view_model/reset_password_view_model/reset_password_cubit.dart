@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/core/utils/result.dart';
+import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/features/auth/data/model/reset_password_request.dart';
 import 'package:online_exam/features/auth/domain/usecase/reset_password_use_case.dart';
 import 'package:online_exam/features/auth/presentation/view_model/reset_password_view_model/reset_password_state.dart';
@@ -27,7 +27,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         emit(ResetPasswordSuccessState(result.data));
         break;
       case Failure<AuthResponseModel>():
-        emit(ResetPasswordFailureState(result.exception));
+        emit(ResetPasswordFailureState(result.exception.message));
         break;
     }
   }

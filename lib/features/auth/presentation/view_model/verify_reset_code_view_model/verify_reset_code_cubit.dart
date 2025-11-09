@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/core/utils/result.dart';
+import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 import 'package:online_exam/features/auth/domain/usecase/verify_reset_code_use_case.dart';
@@ -25,7 +25,7 @@ class VerifyResetCodeCubit extends Cubit<VerifyResetCodeState> {
         emit(VerifyResetCodeSuccessState(result.data));
         break;
       case Failure<AuthResponseModel>():
-        emit(VerifyResetCodeFailureState(result.exception));
+        emit(VerifyResetCodeFailureState(result.exception.message));
         break;
     }
   }
