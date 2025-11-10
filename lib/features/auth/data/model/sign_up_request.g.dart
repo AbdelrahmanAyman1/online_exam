@@ -8,9 +8,9 @@ part of 'sign_up_request.dart';
 
 SignUpRequestModel _$SignUpRequestModelFromJson(Map<String, dynamic> json) =>
     SignUpRequestModel(
-      email: json['email'] as String,
-      password: json['password'] as String,
-      rePassword: json['rePassword'] as String,
+      email: json['email'] as String?,
+      password: json['password'] as String?,
+      rePassword: json['rePassword'] as String?,
       userName: json['username'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,

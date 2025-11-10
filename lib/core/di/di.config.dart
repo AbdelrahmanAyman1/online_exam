@@ -1,0 +1,102 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:dio/dio.dart' as _i361;
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+import 'package:pretty_dio_logger/pretty_dio_logger.dart' as _i528;
+
+import '../../features/auth/data/datasourse/online_data_sourse.dart' as _i358;
+import '../../features/auth/data/datasourse/online_data_sourse_impl.dart'
+    as _i914;
+import '../../features/auth/data/repo/auth_repo_imp.dart' as _i39;
+import '../../features/auth/domain/repo/auth_repo.dart' as _i170;
+import '../../features/auth/domain/usecase/forget_password_usecase.dart'
+    as _i16;
+import '../../features/auth/domain/usecase/login_use_case.dart' as _i391;
+import '../../features/auth/domain/usecase/reset_password_use_case.dart'
+    as _i878;
+import '../../features/auth/domain/usecase/sign_up_usecase.dart' as _i134;
+import '../../features/auth/domain/usecase/verify_reset_code_use_case.dart'
+    as _i1040;
+import '../../features/auth/presentation/view_model/forget_password_view_model/forget_password_cubit.dart'
+    as _i1043;
+import '../../features/auth/presentation/view_model/login_view_model/login_cubit.dart'
+    as _i925;
+import '../../features/auth/presentation/view_model/reset_password_view_model/reset_password_cubit.dart'
+    as _i609;
+import '../../features/auth/presentation/view_model/sign_up_view_model/sign_up_cubit.dart'
+    as _i230;
+import '../../features/auth/presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart'
+    as _i451;
+import '../api/api_client.dart' as _i277;
+import '../api/api_module.dart' as _i0;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  _i174.GetIt init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final apiModule = _$ApiModule();
+    gh.singleton<_i361.BaseOptions>(() => apiModule.providerOption());
+    gh.singleton<_i528.PrettyDioLogger>(() => apiModule.prvoideLogger());
+    gh.singleton<_i361.Dio>(
+      () => apiModule.provideDio(
+        gh<_i361.BaseOptions>(),
+        gh<_i528.PrettyDioLogger>(),
+      ),
+    );
+    gh.singleton<_i277.ApiClient>(
+      () => apiModule.provideApiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i358.OnLineDataSoures>(
+      () => _i914.OnlineDataSourseImpl(gh<_i277.ApiClient>()),
+    );
+    gh.lazySingleton<_i170.AuthRepo>(
+      () => _i39.AuthRepoImp(gh<_i358.OnLineDataSoures>()),
+    );
+    gh.lazySingleton<_i16.ForgetPasswordUseCase>(
+      () => _i16.ForgetPasswordUseCase(gh<_i170.AuthRepo>()),
+    );
+    gh.lazySingleton<_i391.LoginUseCase>(
+      () => _i391.LoginUseCase(gh<_i170.AuthRepo>()),
+    );
+    gh.lazySingleton<_i878.ResetPasswordUseCase>(
+      () => _i878.ResetPasswordUseCase(gh<_i170.AuthRepo>()),
+    );
+    gh.lazySingleton<_i1040.VerifyResetCodeUseCase>(
+      () => _i1040.VerifyResetCodeUseCase(gh<_i170.AuthRepo>()),
+    );
+    gh.factory<_i609.ResetPasswordCubit>(
+      () => _i609.ResetPasswordCubit(gh<_i878.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i1043.ForgetPasswordCubit>(
+      () => _i1043.ForgetPasswordCubit(gh<_i16.ForgetPasswordUseCase>()),
+    );
+    gh.lazySingleton<_i134.SignUpUsecase>(
+      () => _i134.SignUpUsecase(gh<_i170.AuthRepo>()),
+    );
+    gh.factory<_i451.VerifyResetCodeCubit>(
+      () => _i451.VerifyResetCodeCubit(gh<_i1040.VerifyResetCodeUseCase>()),
+    );
+    gh.factory<_i230.SignUpCubit>(
+      () => _i230.SignUpCubit(signUpUsecase: gh<_i134.SignUpUsecase>()),
+    );
+    gh.factory<_i925.LoginCubit>(
+      () => _i925.LoginCubit(gh<_i391.LoginUseCase>()),
+    );
+    return this;
+  }
+}
+
+class _$ApiModule extends _i0.ApiModule {}

@@ -7,9 +7,9 @@ class ForgetPasswordInitial extends ForgetPasswordState {}
 class ForgetPasswordLoadingState extends ForgetPasswordState {}
 
 class ForgetPasswordFailureState extends ForgetPasswordState {
-  Exception exception;
+  final String? errorMessage;
 
-  ForgetPasswordFailureState(this.exception);
+  ForgetPasswordFailureState(this.errorMessage);
 }
 
 class ForgetPasswordSuccessState extends ForgetPasswordState {

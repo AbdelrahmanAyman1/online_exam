@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:online_exam/core/utils/app_assets.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
+import 'package:online_exam/core/utils/app_toast.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_model/sign_up_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/sign_up_view_model/sign_up_state.dart';
-import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/create_account_or_have_account_widget.dart';
 import 'package:online_exam/features/auth/presentation/widgets/sing_up_form.dart';
 
@@ -38,18 +38,17 @@ class SignUpView extends StatelessWidget {
       ),
       body: BlocListener<SignUpCubit, SignUpState>(
         listener: (context, state) {
+          Toast.showLoading(
+            context: context,
+            isLoading: state is SignUpLoadingState,
+          );
           if (state is SignUpSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.signUpResponseModel.message ?? "")),
-            );
-            Navigator.of(context).pushReplacementNamed(LoginView.routeName);
-          }
-          if (state is SignUpFailureState) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.exception.toString())));
+            Toast.showToast(context: context, msg: "Success");
+          } else if (state is SignUpFailureState) {
+            Toast.showToast(context: context, msg: "${state.errorMessage}");
           }
         },
+
         child: SingleChildScrollView(
           child: Column(
             children: [

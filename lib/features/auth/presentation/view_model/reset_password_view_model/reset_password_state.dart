@@ -7,9 +7,9 @@ class ResetPasswordInitial extends ResetPasswordState {}
 class ResetPasswordLoadingState extends ResetPasswordState {}
 
 class ResetPasswordFailureState extends ResetPasswordState {
-  Exception exception;
+ final String ?errorMessage;
 
-  ResetPasswordFailureState(this.exception);
+  ResetPasswordFailureState(this.errorMessage);
 }
 
 class ResetPasswordSuccessState extends ResetPasswordState {
