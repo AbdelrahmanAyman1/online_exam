@@ -9,7 +9,9 @@ import 'package:online_exam/features/auth/presentation/view_model/verify_reset_c
 import 'package:online_exam/features/auth/presentation/views/forget_password_view.dart';
 import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
-import 'package:online_exam/features/home/presentation/view/home_view.dart';
+import 'package:online_exam/features/home/presentation/view/app_section.dart';
+import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
+import 'package:online_exam/features/home/presentation/widget/language_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
@@ -18,9 +20,11 @@ class OnlineExamApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.routeName,
+      initialRoute: LanguageView.routeName,
       routes: {
-        HomeView.routeName: (context) => const HomeView(),
+        LanguageView.routeName: (context) => const LanguageView(),
+        AppSection.routeName: (context) => const AppSection(),
+        DetailsExamLevel.routeName: (context) => const DetailsExamLevel(),
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
           child: const SignUpView(),
