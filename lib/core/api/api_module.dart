@@ -1,16 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/api/api_client.dart';
+import 'package:online_exam/core/constant/env.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @module
 abstract class ApiModule {
-  @singleton
+  @lazySingleton
   ApiClient provideApiClient(Dio dio) {
-    return ApiClient(dio, baseUrl: "https://exam.elevateegy.com/api/v1/");
+    return ApiClient(dio, baseUrl: Env.baseUrl);
   }
 
-  @singleton
+  @lazySingleton
   Dio provideDio(BaseOptions option, PrettyDioLogger logger) {
     var dio = Dio(option);
 
@@ -19,16 +20,16 @@ abstract class ApiModule {
     return dio;
   }
 
-  @singleton
+  @lazySingleton
   BaseOptions providerOption() {
     return BaseOptions(
+      baseUrl: Env.baseUrl,
       sendTimeout: Duration(seconds: 60),
       receiveTimeout: Duration(seconds: 60),
-      validateStatus: (status) => status != null && status < 500,
     );
   }
 
-  @singleton
+  @lazySingleton
   PrettyDioLogger prvoideLogger() {
     return PrettyDioLogger(
       requestBody: true,

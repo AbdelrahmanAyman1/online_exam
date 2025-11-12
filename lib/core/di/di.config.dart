@@ -48,15 +48,15 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final apiModule = _$ApiModule();
-    gh.singleton<_i361.BaseOptions>(() => apiModule.providerOption());
-    gh.singleton<_i528.PrettyDioLogger>(() => apiModule.prvoideLogger());
-    gh.singleton<_i361.Dio>(
+    gh.lazySingleton<_i361.BaseOptions>(() => apiModule.providerOption());
+    gh.lazySingleton<_i528.PrettyDioLogger>(() => apiModule.prvoideLogger());
+    gh.lazySingleton<_i361.Dio>(
       () => apiModule.provideDio(
         gh<_i361.BaseOptions>(),
         gh<_i528.PrettyDioLogger>(),
       ),
     );
-    gh.singleton<_i277.ApiClient>(
+    gh.lazySingleton<_i277.ApiClient>(
       () => apiModule.provideApiClient(gh<_i361.Dio>()),
     );
     gh.lazySingleton<_i358.OnLineDataSoures>(
