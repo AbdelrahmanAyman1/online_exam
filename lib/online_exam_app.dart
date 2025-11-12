@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:online_exam/core/constant/constants.dart';
 import 'package:online_exam/features/auth/presentation/view_model/forget_password_view_model/forget_password_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/login_view_model/login_cubit.dart';
 import 'package:online_exam/features/auth/presentation/view_model/reset_password_view_model/reset_password_cubit.dart';
@@ -13,12 +14,12 @@ import 'package:online_exam/features/home/presentation/view/home_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
-
+//
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.routeName,
+      initialRoute: isUserLoggedIn ? HomeView.routeName : LoginView.routeName,
       routes: {
         HomeView.routeName: (context) => const HomeView(),
         SignUpView.routeName: (context) => BlocProvider(
