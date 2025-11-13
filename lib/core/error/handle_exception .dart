@@ -29,7 +29,5 @@ class HandleException {
     return UnKnownErrer(e.toString());
   }
 
-  static UnKnownErrer handleCatchError(Object e) {
-    return UnKnownErrer(e.toString());
-  }
+ 
 }

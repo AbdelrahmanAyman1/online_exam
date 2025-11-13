@@ -3,6 +3,7 @@ import 'package:online_exam/core/utils/app_assets.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
+import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 
 class DetailsExamLevel extends StatelessWidget {
   static const String routeName = "Details-Exam-Level";
@@ -10,6 +11,7 @@ class DetailsExamLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+var examArg=    ModalRoute.of(context)!.settings.arguments as ExamsEntity;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -22,7 +24,7 @@ class DetailsExamLevel extends StatelessWidget {
                 Image.asset(AppAssets.profit, width: 47, height: 47),
                 SizedBox(width: 12),
                 Text(
-                  "Languages",
+                  "${examArg.title}",
                   style: TextStyles.semiBold12.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -30,7 +32,7 @@ class DetailsExamLevel extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "39 Minutes",
+                  "${examArg.duration} Minutes",
                   style: TextStyles.regular13.copyWith(
                     color: AppColors.blue100,
                   ),
@@ -40,9 +42,9 @@ class DetailsExamLevel extends StatelessWidget {
             SizedBox(height: 8),
             Row(
               children: [
-                Text("High level", style: TextStyles.medium16),
+                Text("${examArg.title}", style: TextStyles.medium16),
                 SizedBox(height: 19, child: VerticalDivider()),
-                Text("20 Question", style: TextStyles.regular14),
+                Text("${examArg.numberOfQuestions} Question", style: TextStyles.regular14),
               ],
             ),
             SizedBox(height: 40),

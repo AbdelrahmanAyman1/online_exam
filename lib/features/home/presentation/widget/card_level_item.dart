@@ -1,17 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:online_exam/core/utils/app_assets.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
+import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
 
 class CardLevelItem extends StatelessWidget {
-  const CardLevelItem({super.key});
-
+  const CardLevelItem({super.key, required this.exam});
+  final ExamsEntity exam;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(DetailsExamLevel.routeName),
+      onTap: () => Navigator.of(context).pushNamed(DetailsExamLevel.routeName,
+      arguments: exam,
+      ),
       child: Card(
         elevation: 5,
         child: Padding(
@@ -27,20 +29,23 @@ class CardLevelItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("High level", style: TextStyles.medium16),
+                        Text("${exam.title}", style: TextStyles.medium16),
 
                         Text(
-                          "39 Minutes",
+                          "${exam.duration} Minutes",
                           style: TextStyles.regular13.copyWith(
                             color: AppColors.blue100,
                           ),
                         ),
                       ],
                     ),
-                    Text("20 Question", style: TextStyles.regular13),
+                    Text(
+                      "${exam.numberOfQuestions} Question",
+                      style: TextStyles.regular13,
+                    ),
                     SizedBox(height: 16),
                     Text(
-                      "From: 1.00   To: 6.00",
+                      "${exam.createdAt}",
                       style: TextStyles.regular13.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

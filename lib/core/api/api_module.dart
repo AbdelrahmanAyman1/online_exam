@@ -22,6 +22,9 @@ abstract class ApiModule {
   @singleton
   BaseOptions providerOption() {
     return BaseOptions(
+      headers: {
+        'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTM3Nzk4OGZiMTlhZDk1NWIyNmM1MiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzYyOTcwMzk4fQ.e_WL2dSPtmabLHnPl_1vdAaXRIDuU5kzVQeHfxULiXw',
+      },
       sendTimeout: Duration(seconds: 60),
       receiveTimeout: Duration(seconds: 60),
       validateStatus: (status) => status != null && status < 500,

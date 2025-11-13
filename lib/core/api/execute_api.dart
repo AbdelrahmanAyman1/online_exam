@@ -7,7 +7,5 @@ Future<Result<T>> excuteApi<T>(Future<T> Function() callApi) async {
     return Success(result);
   } on Exception catch (e) {
     return Failure(HandleException.handleMessageError(e));
-  } catch (e) {
-    return Failure(HandleException.handleCatchError(e));
   }
 }
