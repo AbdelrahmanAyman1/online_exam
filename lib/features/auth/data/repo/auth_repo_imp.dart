@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/features/auth/data/datasourse/online_data_sourse.dart';
@@ -35,10 +34,12 @@ class AuthRepoImp implements AuthRepo {
     return await _dataSourse.forgetPassword(forgetPasswordRequestModel);
   }
 
+  @override
   Future<Result<AuthResponseModel>> verifyResetCode(
     VerifyResetCodeRequestModel verifyResetCodeRequestModel,
   ) async => await _dataSourse.verifyResetCode(verifyResetCodeRequestModel);
 
+  @override
   Future<Result<AuthResponseModel>> resetPassword(
     ResetPasswordRequest resetPasswordRequest,
   ) async {

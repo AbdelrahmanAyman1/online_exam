@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/api/result.dart';
+import 'package:online_exam/core/constant/constants.dart';
+import 'package:online_exam/core/helper/secure_storage.dart';
 import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 import 'package:online_exam/features/auth/domain/usecase/login_use_case.dart';
@@ -22,11 +24,16 @@ class LoginCubit extends Cubit<LoginState> {
     var result = await loginUseCase.invoke(loginRequestModel);
     switch (result) {
       case Success<AuthResponseModel>():
+        _saveToken(result.data.token ?? "");
         emit(LoginSuccessState(result.data));
         break;
       case Failure<AuthResponseModel>():
-          emit(LoginFailureState(result.exception.message));
+        emit(LoginFailureState(result.exception.message));
         break;
     }
+  }
+
+  void _saveToken(String token) async {
+    await SecureStorage().write(SharedKeys.userToken, token);
   }
 }
