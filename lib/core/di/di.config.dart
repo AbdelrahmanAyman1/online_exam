@@ -37,6 +37,16 @@ import '../../features/auth/presentation/view_model/sign_up_view_model/sign_up_c
     as _i230;
 import '../../features/auth/presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart'
     as _i451;
+import '../../features/questions/data/data_source/questions_data_source.dart'
+    as _i269;
+import '../../features/questions/data/data_source/questions_data_source_impl.dart'
+    as _i161;
+import '../../features/questions/data/repo/exam_page_repo_impl.dart' as _i500;
+import '../../features/questions/domain/repo/exam_page_repo.dart' as _i406;
+import '../../features/questions/domain/use_case/get_questions_use_case.dart'
+    as _i1061;
+import '../../features/questions/presentation/view_model/exam_page_cubit.dart'
+    as _i462;
 import '../api/api_client.dart' as _i277;
 import '../api/api_module.dart' as _i0;
 
@@ -65,6 +75,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i170.AuthRepo>(
       () => _i39.AuthRepoImp(gh<_i358.OnLineDataSoures>()),
     );
+    gh.factory<_i269.QuestionsDataSource>(
+      () => _i161.QuestionsDataSourceImpl(gh<_i277.ApiClient>()),
+    );
     gh.lazySingleton<_i16.ForgetPasswordUseCase>(
       () => _i16.ForgetPasswordUseCase(gh<_i170.AuthRepo>()),
     );
@@ -86,6 +99,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i134.SignUpUsecase>(
       () => _i134.SignUpUsecase(gh<_i170.AuthRepo>()),
     );
+    gh.factory<_i406.ExamPageRepo>(
+      () => _i500.ExamPageRepoImpl(gh<_i269.QuestionsDataSource>()),
+    );
     gh.factory<_i451.VerifyResetCodeCubit>(
       () => _i451.VerifyResetCodeCubit(gh<_i1040.VerifyResetCodeUseCase>()),
     );
@@ -94,6 +110,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i925.LoginCubit>(
       () => _i925.LoginCubit(gh<_i391.LoginUseCase>()),
+    );
+    gh.factory<_i1061.GetQuestionsUseCase>(
+      () => _i1061.GetQuestionsUseCase(gh<_i406.ExamPageRepo>()),
+    );
+    gh.factory<_i462.ExamPageCubit>(
+      () => _i462.ExamPageCubit(gh<_i1061.GetQuestionsUseCase>()),
     );
     return this;
   }

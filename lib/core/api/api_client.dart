@@ -5,6 +5,8 @@ import 'package:online_exam/features/auth/data/model/login_request_model.dart';
 import 'package:online_exam/features/auth/data/model/reset_password_request.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
+import 'package:online_exam/features/questions/data/model/questions_dto.dart';
+import 'package:online_exam/features/questions/data/model/questions_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_response_dto.dart';
 part 'api_client.g.dart';
@@ -34,5 +36,11 @@ abstract class ApiClient {
   @PUT(EndPoints.resetPassword)
   Future<SignUpResponseDto> resetPassword(
     @Body() ResetPasswordRequest resetPasswordRequest,
+  );
+
+  @GET(EndPoints.getQuestions)
+  Future<List<QuestionsDto>> getQuestions(
+    @Query("exam") @Header("token") String examId,
+    String token,
   );
 }
