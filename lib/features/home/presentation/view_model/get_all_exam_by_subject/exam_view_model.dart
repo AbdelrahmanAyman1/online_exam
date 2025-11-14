@@ -8,17 +8,30 @@ import 'package:online_exam/features/home/presentation/view_model/get_all_exam_b
 @injectable
 class ExamViewModel extends Cubit<ExamState> {
   final GetExamOnSubjectUsecase _getExamOnSubjectUsecase;
-  ExamViewModel(this._getExamOnSubjectUsecase) : super(ExamInitialState());
-  void fetchExamsBySubject(String subject) async {
-    emit(ExamLoadingState());
+
+  ExamViewModel(this._getExamOnSubjectUsecase)
+    : super(
+        ExamState(data: null, errorMessage: null, status: ExamStatus.inital),
+      );
+
+  void doIntent(HomeIntent intent) {
+    switch (intent) {
+      case LoadAllExams():
+        _fetchExamsBySubject(intent.subject);
+    }
+  }
+
+  void _fetchExamsBySubject(String subject) async {
+    emit(state.copyWith(status: ExamStatus.loading));
     final result = await _getExamOnSubjectUsecase.getAllExamBySubject(subject);
     switch (result) {
       case Success<List<ExamsEntity>>():
-        emit(ExamSuccessState(result.data));
+        emit(state.copyWith(status: ExamStatus.loaded, data: result.data));
       case Failure<List<ExamsEntity>>():
         emit(
-          ExamFailureState(
-            result.exception.message ?? "An unknown error occurred",
+          state.copyWith(
+            status: ExamStatus.failure,
+            errorMessage: result.exception.message,
           ),
         );
     }

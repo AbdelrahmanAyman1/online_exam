@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'exam_model_dto.g.dart';
+
 @JsonSerializable()
 class ExamsResponseModelDto {
+  
   @JsonKey(name: "message")
   String? message;
   @JsonKey(name: "metadata")
@@ -15,6 +19,20 @@ class ExamsResponseModelDto {
       _$ExamsResponseModelDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ExamsResponseModelDtoToJson(this);
+
+
+  @override
+  bool operator ==(covariant ExamsResponseModelDto other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.message == message &&
+      other.pagination == pagination &&
+      listEquals(other.exams, exams);
+  }
+
+  @override
+  int get hashCode => message.hashCode ^ pagination.hashCode ^ exams.hashCode;
 }
 
 @JsonSerializable()

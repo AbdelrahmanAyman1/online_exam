@@ -11,23 +11,26 @@ import 'package:online_exam/features/auth/presentation/views/forget_password_vie
 import 'package:online_exam/features/auth/presentation/views/login_view.dart';
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
 import 'package:online_exam/features/home/presentation/view/app_section.dart';
+import 'package:online_exam/features/home/presentation/view_model/get_all_exam_by_subject/exam_state.dart';
 import 'package:online_exam/features/home/presentation/view_model/get_all_exam_by_subject/exam_view_model.dart';
 import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
-//
+  //
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: isUserLoggedIn ? AppSection.routeName : LoginView.routeName,
+      initialRoute: isUserLoggedIn
+          ? LanguageView.routeName
+          : LoginView.routeName,
       routes: {
         LanguageView.routeName: (context) => BlocProvider(
           create: (context) =>
               GetIt.instance.get<ExamViewModel>()
-                ..fetchExamsBySubject("670037f6728c92b7fdf434fc"),
+                ..doIntent(LoadAllExams("670037f6728c92b7fdf434fc")),
           child: const LanguageView(),
         ),
         AppSection.routeName: (context) => const AppSection(),

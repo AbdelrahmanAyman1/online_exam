@@ -1,17 +1,36 @@
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 
-sealed class ExamState {}
+enum ExamStatus { inital, loading, loaded, failure }
 
-class ExamInitialState extends ExamState {}
-
-class ExamLoadingState extends ExamState {}
-
-class ExamSuccessState extends ExamState {
-  final List<ExamsEntity> exams;
-  ExamSuccessState(this.exams);
+extension MyExamState on ExamState {
+  bool get isLoading => status == ExamStatus.loading;
+  bool get isLoaded => status == ExamStatus.loaded;
+  bool get isFailure => status == ExamStatus.failure;
 }
 
-class ExamFailureState extends ExamState {
-  final String errorMessage;
-  ExamFailureState(this.errorMessage);
+class ExamState {
+  final ExamStatus? status;
+  final List<ExamsEntity>? data;
+  final String? errorMessage;
+
+  ExamState({this.status = ExamStatus.inital, this.data, this.errorMessage});
+
+  ExamState copyWith({
+    ExamStatus? status,
+    List<ExamsEntity>? data,
+    String? errorMessage,
+  }) {
+    return ExamState(
+      status: status ?? this.status,
+      data: data ?? this.data,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
+}
+
+sealed class HomeIntent {}
+
+class LoadAllExams extends HomeIntent {
+  String subject;
+  LoadAllExams(this.subject);
 }

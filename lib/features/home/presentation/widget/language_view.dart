@@ -19,10 +19,10 @@ class LanguageView extends StatelessWidget {
       ),
       body: BlocBuilder<ExamViewModel, ExamState>(
         builder: (context, state) {
-          if (state is ExamSuccessState) {
+          if (state.isLoaded) {
             return _successState(state);
           }
-          if (state is ExamLoadingState) {
+          if (state.isLoading) {
             return _loadingState(state);
           } else {
             return Center(
@@ -34,14 +34,14 @@ class LanguageView extends StatelessWidget {
     );
   }
 
-  Widget _successState(ExamSuccessState state) {
+  Widget _successState(ExamState state) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          return CardLevelItem(exam: state.exams[index]);
+          return CardLevelItem(exam: state.data![index]);
         },
-        itemCount: state.exams.length,
+        itemCount: state.data!.length,
       ),
     );
   }
@@ -54,7 +54,7 @@ class LanguageView extends StatelessWidget {
       createdAt: DateTime(2024, 1, 1),
     );
     return Skeletonizer(
-      enabled: state is ExamLoadingState,
+      enabled: state.isLoading,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView.builder(

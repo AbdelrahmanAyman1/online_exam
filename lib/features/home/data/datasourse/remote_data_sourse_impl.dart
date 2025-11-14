@@ -15,7 +15,7 @@ class RemoteDataSourseImpl implements RemoteDataSourse {
   Future<Result<List<ExamsEntity>>> getAllExamBySubject(String subject) {
     return excuteApi<List<ExamsEntity>>(() async {
       var response = await _apiClient.getAllExamBySubject(subject);
-      return response.exams?.map((exam) => exam.toEntity()).toList() ?? [];
+      return response.exams?.map((exam) => exam.toEntity()).toList() ??[];
     });
   }
 }

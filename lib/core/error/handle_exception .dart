@@ -3,6 +3,9 @@ import "package:online_exam/core/error/custom_error.dart";
 
 class HandleException {
   static CustomError handleMessageError(Exception e) {
+    if (e is CustomError) {
+      return e;
+    }
     if (e is DioException) {
       switch (e.type) {
         case DioExceptionType.connectionTimeout:

@@ -37,7 +37,7 @@ abstract class ApiClient {
     @Body() ResetPasswordRequest resetPasswordRequest,
   );
 
-  @GET('exams')
+  @GET(EndPoints.exam)
   Future<ExamsResponseModelDto> getAllExamBySubject(
     @Query('subject') String subject,
   );
