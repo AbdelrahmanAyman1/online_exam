@@ -10,7 +10,7 @@ import 'package:online_exam/features/auth/presentation/view_model/login_view_mod
 import 'package:online_exam/features/auth/presentation/views/sign_up_view.dart';
 import 'package:online_exam/features/auth/presentation/widgets/create_account_or_have_account_widget.dart';
 import 'package:online_exam/features/auth/presentation/widgets/remember_me_and_forget_widget.dart';
-import 'package:online_exam/features/home/presentation/view/home_view.dart';
+import 'package:online_exam/features/home/presentation/view/app_section.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "LoginView";
@@ -59,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
                   context: context,
                   msg: state.authResponseModel.message ?? "Login successful",
                 );
-                Navigator.of(context).pushReplacementNamed(HomeView.routeName);
+                Navigator.of(context).pushReplacementNamed(AppSection.routeName);
               }
               if (state is LoginFailureState) {
                 Toast.showToast(

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/api/api_client.dart';
+import 'package:online_exam/core/api/interceptors/token_interceptor.dart';
 import 'package:online_exam/core/constant/env.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -14,9 +15,8 @@ abstract class ApiModule {
   @lazySingleton
   Dio provideDio(BaseOptions option, PrettyDioLogger logger) {
     var dio = Dio(option);
-
     dio.interceptors.add(logger);
-
+    dio.interceptors.add(TokenInterceptor());
     return dio;
   }
 
@@ -36,6 +36,8 @@ abstract class ApiModule {
       request: true,
       responseBody: true,
       error: true,
+      requestHeader: true,
+      responseHeader: false,
     );
   }
 }
