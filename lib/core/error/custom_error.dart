@@ -1,18 +1,23 @@
-class CustomError implements Exception {
+import 'package:equatable/equatable.dart';
+
+class CustomError extends Equatable implements Exception {
   final String? message;
   final int? code;
 
-  CustomError(this.message, {this.code});
+  const CustomError(this.message, {this.code});
+
+  @override
+  List<Object?> get props => [message, code];
 }
 
 class ConnectionError extends CustomError {
-  ConnectionError(super.message, {super.code});
+  const ConnectionError(super.message, {super.code});
 }
 
 class ServerError extends CustomError {
-  ServerError(super.message, {super.code});
+  const ServerError(super.message, {super.code});
 }
 
 class UnKnownErrer extends CustomError {
-  UnKnownErrer(super.message, {super.code});
+  const UnKnownErrer(super.message, {super.code});
 }

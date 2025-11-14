@@ -10,6 +10,7 @@ import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 
+
 @LazySingleton(as: OnLineDataSoures)
 class OnlineDataSourseImpl implements OnLineDataSoures {
   final ApiClient _apiClient;

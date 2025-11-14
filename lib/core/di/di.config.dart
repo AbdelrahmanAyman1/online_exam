@@ -37,6 +37,15 @@ import '../../features/auth/presentation/view_model/sign_up_view_model/sign_up_c
     as _i230;
 import '../../features/auth/presentation/view_model/verify_reset_code_view_model/verify_reset_code_cubit.dart'
     as _i451;
+import '../../features/home/data/datasourse/remote_data_sourse.dart' as _i617;
+import '../../features/home/data/datasourse/remote_data_sourse_impl.dart'
+    as _i542;
+import '../../features/home/data/repo/exam_on_subject_repo_impl.dart' as _i521;
+import '../../features/home/domain/repo/get_exam_on_subject_repo.dart' as _i377;
+import '../../features/home/domain/usecase/get_exam_on_subject_usecase.dart'
+    as _i685;
+import '../../features/home/presentation/view_model/get_all_exam_by_subject/exam_view_model.dart'
+    as _i1035;
 import '../api/api_client.dart' as _i277;
 import '../api/api_module.dart' as _i0;
 
@@ -59,6 +68,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i277.ApiClient>(
       () => apiModule.provideApiClient(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i617.RemoteDataSourse>(
+      () => _i542.RemoteDataSourseImpl(gh<_i277.ApiClient>()),
+    );
     gh.lazySingleton<_i358.OnLineDataSoures>(
       () => _i914.OnlineDataSourseImpl(gh<_i277.ApiClient>()),
     );
@@ -80,6 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i609.ResetPasswordCubit>(
       () => _i609.ResetPasswordCubit(gh<_i878.ResetPasswordUseCase>()),
     );
+    gh.lazySingleton<_i377.ExamRepo>(
+      () => _i521.ExamOnSubjectRepoImpl(gh<_i617.RemoteDataSourse>()),
+    );
     gh.factory<_i1043.ForgetPasswordCubit>(
       () => _i1043.ForgetPasswordCubit(gh<_i16.ForgetPasswordUseCase>()),
     );
@@ -94,6 +109,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i925.LoginCubit>(
       () => _i925.LoginCubit(gh<_i391.LoginUseCase>()),
+    );
+    gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
+      () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
+    );
+    gh.factory<_i1035.ExamViewModel>(
+      () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),
     );
     return this;
   }
