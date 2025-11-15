@@ -168,13 +168,39 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<List<QuestionsDto>> getQuestions(String examId, String token) async {
+  Future<ExamsResponseModelDto> getAllExamBySubject(String subject) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'subject': subject};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ExamsResponseModelDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'exams',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ExamsResponseModelDto _value;
+    try {
+      _value = ExamsResponseModelDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<QuestionsResponse> getQuestions(String examId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'exam': examId};
-    final _headers = <String, dynamic>{r'token': examId};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<QuestionsDto>>(
+    final _options = _setStreamType<QuestionsResponse>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -184,12 +210,10 @@ class _ApiClient implements ApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<QuestionsDto> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late QuestionsResponse _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => QuestionsDto.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = QuestionsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

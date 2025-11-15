@@ -4,15 +4,15 @@ import 'package:online_exam/features/home/presentation/view/profile_view.dart';
 import 'package:online_exam/features/home/presentation/view/result_view.dart';
 import 'package:online_exam/features/home/presentation/widget/bottom_nav_bar_widget.dart';
 
-class HomeView extends StatefulWidget {
-  static const String routeName = "home_view";
-  const HomeView({super.key});
+class AppSection extends StatefulWidget {
+  static const String routeName = "app_section";
+  const AppSection({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<AppSection> createState() => _AppSectionState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _AppSectionState extends State<AppSection> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
