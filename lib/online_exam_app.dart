@@ -29,6 +29,10 @@ class OnlineExamApp extends StatelessWidget {
           ? LanguageView.routeName
           : LoginView.routeName,
       routes: {
+        ExamPage.routeName: (context) => BlocProvider(
+          create: (context) => GetIt.instance.get<ExamPageCubit>(),
+          child: const ExamPage(),
+        ),
         LanguageView.routeName: (context) => BlocProvider(
           create: (context) =>
               GetIt.instance.get<ExamViewModel>()

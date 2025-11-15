@@ -126,17 +126,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i925.LoginCubit>(
       () => _i925.LoginCubit(gh<_i391.LoginUseCase>()),
     );
-    gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
-      () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
-    );
-    gh.factory<_i1035.ExamViewModel>(
-      () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),
-    );
     gh.factory<_i1061.GetQuestionsUseCase>(
       () => _i1061.GetQuestionsUseCase(gh<_i406.ExamPageRepo>()),
     );
+    gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
+      () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
+    );
     gh.factory<_i462.ExamPageCubit>(
       () => _i462.ExamPageCubit(gh<_i1061.GetQuestionsUseCase>()),
+    );
+    gh.factory<_i1035.ExamViewModel>(
+      () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),
     );
     return this;
   }

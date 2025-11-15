@@ -1,6 +1,6 @@
 import 'package:online_exam/core/api/result.dart';
-import 'package:online_exam/features/questions/data/model/questions_dto.dart';
+import 'package:online_exam/features/questions/data/model/questions_response.dart';
 
 abstract class QuestionsDataSource {
-  Future<Result<List<QuestionsDto>>> getQuestions(String examId, String token);
+  Future<Result<QuestionsResponse>> getQuestions(String examId);
 }
