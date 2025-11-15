@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:online_exam/features/home/data/model/exam_model_dto.dart';
@@ -32,14 +33,14 @@ class PaginationEntity {
   PaginationEntity({this.currentPage, this.numberOfPages, this.limit});
 }
 
-class ExamsEntity {
-  String? id;
-  String? title;
-  int? duration;
-  String? subject;
-  int? numberOfQuestions;
-  bool? active;
-  DateTime? createdAt;
+class ExamsEntity extends Equatable {
+  final String? id;
+  final String? title;
+  final int? duration;
+  final String? subject;
+  final int? numberOfQuestions;
+  final bool? active;
+  final DateTime? createdAt;
 
   ExamsEntity({
     this.id,
@@ -63,27 +64,13 @@ class ExamsEntity {
   }
 
   @override
-  bool operator ==(covariant ExamsEntity other) {
-    if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.title == title &&
-      other.duration == duration &&
-      other.subject == subject &&
-      other.numberOfQuestions == numberOfQuestions &&
-      other.active == active &&
-      other.createdAt == createdAt;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-      title.hashCode ^
-      duration.hashCode ^
-      subject.hashCode ^
-      numberOfQuestions.hashCode ^
-      active.hashCode ^
-      createdAt.hashCode;
-  }
+  List<Object?> get props => [
+    id,
+    title,
+    duration,
+    subject,
+    numberOfQuestions,
+    active,
+    createdAt,
+  ];
 }
