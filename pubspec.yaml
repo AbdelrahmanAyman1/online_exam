@@ -12,7 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.7
   flutter_svg: ^2.2.1
@@ -24,18 +24,20 @@ dependencies:
   
   # add get_it  
   get_it: ^7.6.0
-  flutter_bloc: ^9.1.1
+  flutter_bloc: 
   skeletonizer: ^2.1.0+1
   flutter_secure_storage: ^9.2.4
   envied: ^1.3.1
   injectable:
-  mockito: ^5.5.1
+  
   equatable: ^2.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  bloc_test: 
+  mockito: 
   retrofit_generator: ^10.0.1
-  build_runner: ^2.10.2
+  build_runner: ^2.7.1
   json_serializable: ^6.10.0
   flutter_lints: ^6.0.0
   injectable_generator: 

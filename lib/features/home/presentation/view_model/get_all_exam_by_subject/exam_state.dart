@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 
 enum ExamStatus { inital, loading, loaded, failure }
@@ -8,12 +9,16 @@ extension MyExamState on ExamState {
   bool get isFailure => status == ExamStatus.failure;
 }
 
-class ExamState {
+class ExamState extends Equatable {
   final ExamStatus? status;
   final List<ExamsEntity>? data;
   final String? errorMessage;
 
-  ExamState({this.status = ExamStatus.inital, this.data, this.errorMessage});
+  const ExamState({
+    this.status = ExamStatus.inital,
+    this.data,
+    this.errorMessage,
+  });
 
   ExamState copyWith({
     ExamStatus? status,
@@ -26,11 +31,18 @@ class ExamState {
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  @override
+  List<Object?> get props => [status, data, errorMessage];
 }
 
 sealed class HomeIntent {}
 
-class LoadAllExams extends HomeIntent {
+class LoadAllExams extends HomeIntent  with EquatableMixin {
   String subject;
   LoadAllExams(this.subject);
+  
+  @override
+  
+  List<Object?> get props => [subject];
 }
