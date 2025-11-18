@@ -1,4 +1,3 @@
-import 'package:online_exam/features/questions/data/model/questions_dto.dart';
 import 'package:online_exam/features/questions/data/model/questions_response.dart';
 
 sealed class ExamPageState {}
@@ -19,8 +18,9 @@ class ExamPageError extends ExamPageState {
   ExamPageError({required this.message});
 }
 
-class AnswerSelected extends ExamPageState {
-  String questionId;
-  String answerKey;
-  AnswerSelected(this.questionId, this.answerKey);
+class ExamTimerTick extends ExamPageState {
+  final int secondsLeft;
+  ExamTimerTick(this.secondsLeft);
 }
+
+class ExamTimerFinished extends ExamPageState {}

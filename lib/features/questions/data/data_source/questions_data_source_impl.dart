@@ -4,6 +4,8 @@ import 'package:online_exam/core/api/execute_api.dart';
 import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/core/error/handle_exception%20.dart';
 import 'package:online_exam/features/questions/data/data_source/questions_data_source.dart';
+import 'package:online_exam/features/questions/data/model/check_questions_request.dart';
+import 'package:online_exam/features/questions/data/model/check_questions_response.dart';
 import 'package:online_exam/features/questions/data/model/questions_response.dart';
 
 @Injectable(as: QuestionsDataSource)
@@ -15,6 +17,19 @@ class QuestionsDataSourceImpl implements QuestionsDataSource {
     try {
       return executeApi<QuestionsResponse>(() async {
         return await apiClient.getQuestions(examId);
+      });
+    } on Exception catch (e) {
+      throw HandleException.handleMessageError(e);
+    }
+  }
+
+  @override
+  Future<Result<CheckQuestionsResponse>> checkQuestions(
+    CheckQuestionsRequest checkQuestionsRequest,
+  ) {
+    try {
+      return executeApi<CheckQuestionsResponse>(() async {
+        return await apiClient.checkQuestions(checkQuestionsRequest);
       });
     } on Exception catch (e) {
       throw HandleException.handleMessageError(e);

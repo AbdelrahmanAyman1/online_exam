@@ -54,8 +54,8 @@ import '../../features/questions/data/repo/exam_page_repo_impl.dart' as _i500;
 import '../../features/questions/domain/repo/exam_page_repo.dart' as _i406;
 import '../../features/questions/domain/use_case/get_questions_use_case.dart'
     as _i1061;
-import '../../features/questions/presentation/view_model/exam_page_cubit.dart'
-    as _i462;
+import '../../features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart'
+    as _i384;
 import '../api/api_client.dart' as _i277;
 import '../api/api_module.dart' as _i0;
 
@@ -132,8 +132,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
       () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
     );
-    gh.factory<_i462.ExamPageCubit>(
-      () => _i462.ExamPageCubit(gh<_i1061.GetQuestionsUseCase>()),
+    gh.factory<_i384.ExamPageCubit>(
+      () => _i384.ExamPageCubit(gh<_i1061.GetQuestionsUseCase>()),
     );
     gh.factory<_i1035.ExamViewModel>(
       () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),

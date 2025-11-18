@@ -1,14 +1,19 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/features/questions/data/model/questions_response.dart';
 import 'package:online_exam/features/questions/domain/use_case/get_questions_use_case.dart';
-import 'package:online_exam/features/questions/presentation/view_model/exam_page_state.dart';
+import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_state.dart';
 
 @injectable
 class ExamPageCubit extends Cubit<ExamPageState> {
   GetQuestionsUseCase getQuestionsUseCase;
   int indexOfQuestion = 0;
+  Timer? _timer;
+  int remainingSeconds = 0;
   Map<String, String> answers = {};
   ExamPageCubit(this.getQuestionsUseCase) : super(ExamPageInitial());
   void getQuestions(String examId) async {
@@ -49,5 +54,26 @@ class ExamPageCubit extends Cubit<ExamPageState> {
     if (state is ExamPageLoaded) {
       emit(ExamPageLoaded(questions: (state as ExamPageLoaded).questions));
     }
+  }
+
+  void startTimer(int seconds) {
+    remainingSeconds = seconds;
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (remainingSeconds > 0) {
+        remainingSeconds--;
+        emit(ExamTimerTick(remainingSeconds));
+      } else {
+        timer.cancel();
+        emit(ExamTimerFinished());
+      }
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }

@@ -1,15 +1,17 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:online_exam/core/di/di.dart';
 import 'package:online_exam/core/utils/app_assets.dart';
+import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
-import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit.dart';
-import 'package:online_exam/features/questions/presentation/view_model/exam_page_state.dart';
+import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart';
+import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_state.dart';
 import 'package:online_exam/features/questions/presentation/widgets/answers_list.dart';
 import 'package:online_exam/features/questions/presentation/widgets/change_questions_buttons.dart';
 
@@ -23,7 +25,7 @@ class ExamPage extends StatefulWidget {
 
 class _ExamPageState extends State<ExamPage> {
   late ExamPageCubit examCubit;
-  late Timer timer;
+
   @override
   void initState() {
     super.initState();
@@ -72,7 +74,7 @@ class _ExamPageState extends State<ExamPage> {
               children: [
                 Image.asset(AppAssets.alarm, fit: BoxFit.cover),
                 SizedBox(width: 8),
-
+                Text("00:05", style: TextStyles.regular12),
                 SizedBox(width: 20),
               ],
             ),
@@ -105,10 +107,24 @@ class _ExamPageState extends State<ExamPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Center(
+                      child: Text(
+                        'Question ${cubit.indexOfQuestion + 1} of ${state.questions.questions!.length}',
+                        style: TextStyles.medium16,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    LinearProgressIndicator(
+                      borderRadius: BorderRadius.circular(3),
+                      color: AppColors.gray,
+                      valueColor: AlwaysStoppedAnimation(AppColors.blueBase),
+                      value:
+                          (cubit.indexOfQuestion + 1) /
+                          state.questions.questions!.length,
+                    ),
+                    SizedBox(height: 10),
                     Text(question.question ?? "", style: TextStyles.medium16),
-
-                    const SizedBox(height: 20),
-
+                    const SizedBox(height: 10),
                     Expanded(
                       child: AnswersList(
                         answers: answers,
@@ -116,8 +132,7 @@ class _ExamPageState extends State<ExamPage> {
                         questionId: questionId,
                       ),
                     ),
-
-                    const ChangeQuestionsButtons(),
+                    Expanded(child: const ChangeQuestionsButtons()),
                   ],
                 );
               }

@@ -16,7 +16,7 @@ import 'package:online_exam/features/home/presentation/view_model/get_all_exam_b
 import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
 import 'package:online_exam/features/questions/presentation/view/exam_page.dart';
-import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit.dart';
+import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
