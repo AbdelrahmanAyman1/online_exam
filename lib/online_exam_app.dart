@@ -16,6 +16,7 @@ import 'package:online_exam/features/home/presentation/view_model/get_all_exam_b
 import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
 import 'package:online_exam/features/questions/presentation/view/exam_page.dart';
+import 'package:online_exam/features/questions/presentation/view/exam_score_page.dart';
 import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart';
 
 class OnlineExamApp extends StatelessWidget {
@@ -40,29 +41,37 @@ class OnlineExamApp extends StatelessWidget {
           child: const LanguageView(),
         ),
         AppSection.routeName: (context) => const AppSection(),
+
         DetailsExamLevel.routeName: (context) => const DetailsExamLevel(),
+
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
           child: const SignUpView(),
         ),
+
         LoginView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<LoginCubit>(),
           child: const LoginView(),
         ),
+
         ForgetPasswordView.routeName: (context) => MultiBlocProvider(
           providers: [
             BlocProvider(
               create: (context) => GetIt.instance.get<ForgetPasswordCubit>(),
             ),
+
             BlocProvider(
               create: (context) => GetIt.instance.get<VerifyResetCodeCubit>(),
             ),
+
             BlocProvider(
               create: (context) => GetIt.instance.get<ResetPasswordCubit>(),
             ),
           ],
           child: const ForgetPasswordView(),
         ),
+
+        ExamScorePage.routeName: (context) => const ExamScorePage(),
       },
     );
   }

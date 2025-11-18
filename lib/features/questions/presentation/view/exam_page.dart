@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -85,7 +82,9 @@ class _ExamPageState extends State<ExamPage> {
           child: BlocBuilder<ExamPageCubit, ExamPageState>(
             builder: (context, state) {
               if (state is ExamPageLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                  child: CircularProgressIndicator(color: AppColors.blueBase),
+                );
               }
 
               if (state is ExamPageError) {
@@ -100,7 +99,7 @@ class _ExamPageState extends State<ExamPage> {
               if (state is ExamPageLoaded) {
                 final cubit = context.read<ExamPageCubit>();
                 final question =
-                    state.questions.questions![cubit.indexOfQuestion];
+                    state.questions!.questions![cubit.indexOfQuestion];
                 final answers = question.answers ?? [];
                 final questionId = question.Id.toString();
 
@@ -109,7 +108,7 @@ class _ExamPageState extends State<ExamPage> {
                   children: [
                     Center(
                       child: Text(
-                        'Question ${cubit.indexOfQuestion + 1} of ${state.questions.questions!.length}',
+                        'Question ${cubit.indexOfQuestion + 1} of ${state.questions!.questions!.length}',
                         style: TextStyles.medium16,
                       ),
                     ),
@@ -120,7 +119,7 @@ class _ExamPageState extends State<ExamPage> {
                       valueColor: AlwaysStoppedAnimation(AppColors.blueBase),
                       value:
                           (cubit.indexOfQuestion + 1) /
-                          state.questions.questions!.length,
+                          state.questions!.questions!.length,
                     ),
                     SizedBox(height: 10),
                     Text(question.question ?? "", style: TextStyles.medium16),
@@ -132,7 +131,7 @@ class _ExamPageState extends State<ExamPage> {
                         questionId: questionId,
                       ),
                     ),
-                    Expanded(child: const ChangeQuestionsButtons()),
+                    Expanded(child: ChangeQuestionsButtons()),
                   ],
                 );
               }

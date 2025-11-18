@@ -7,7 +7,6 @@ import 'package:online_exam/features/questions/presentation/widgets/custom_butto
 
 class ChangeQuestionsButtons extends StatelessWidget {
   const ChangeQuestionsButtons({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExamPageCubit, ExamPageState>(
@@ -19,7 +18,7 @@ class ChangeQuestionsButtons extends StatelessWidget {
               Expanded(
                 child: CustomButton(
                   onPressed: () {
-                    cubit.perviousQuestion();
+                    cubit.previousQuestion();
                   },
                   text: 'Back',
                   borderColor: AppColors.blue100,
@@ -32,9 +31,17 @@ class ChangeQuestionsButtons extends StatelessWidget {
               Expanded(
                 child: CustomButton(
                   onPressed: () {
+                    if (cubit.indexOfQuestion ==
+                        (state.questions!.questions?.length ?? 0) - 1) {
+                      cubit.submitExam(time: 10);
+                    }
                     cubit.nextQuestion();
                   },
-                  text: 'Next',
+                  text:
+                      cubit.indexOfQuestion ==
+                          (state.questions!.questions?.length ?? 0) - 1
+                      ? 'Submit'
+                      : 'Next',
                   borderColor: AppColors.blue100,
                   backgroundColor: AppColors.blue100,
                   textColor: AppColors.white,
