@@ -28,7 +28,6 @@ class ExamDto {
     this.active,
     this.createdAt,
   });
-
   factory ExamDto.fromJson(Map<String, dynamic> json) {
     return _$ExamDtoFromJson(json);
   }

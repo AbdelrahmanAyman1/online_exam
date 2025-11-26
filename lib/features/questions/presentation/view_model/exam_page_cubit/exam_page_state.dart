@@ -1,32 +1,59 @@
-import 'package:online_exam/features/questions/data/model/check_questions_response.dart';
+import 'package:equatable/equatable.dart';
+import 'package:online_exam/core/base_state/base_state.dart';
 import 'package:online_exam/features/questions/data/model/questions_response.dart';
+import 'package:online_exam/features/questions/data/model/check_questions_response.dart';
 
-sealed class ExamPageState {}
+class ExamPageState extends Equatable {
+  final BaseState<QuestionsResponse> questions;
+  final BaseState<CheckQuestionsResponse> submission;
+  final int currentQuestionIndex;
+  final Map<String, String> selectedAnswers; // questionId → answerKey
+  final bool isSubmitting;
+  final int remainingTime;
+  const ExamPageState({
+    required this.questions,
+    required this.submission,
+    required this.currentQuestionIndex,
+    required this.selectedAnswers,
+    required this.isSubmitting,
+    required this.remainingTime,
+  });
 
-class ExamPageInitial extends ExamPageState {}
+  // Initial State
+  static ExamPageState initial() => ExamPageState(
+    questions: IdleState(),
+    submission: IdleState(),
+    currentQuestionIndex: 0,
+    selectedAnswers: {},
+    isSubmitting: false,
+    remainingTime: 1500,
+  );
 
-class ExamPageLoading extends ExamPageState {}
+  ExamPageState copyWith({
+    BaseState<QuestionsResponse>? questions,
+    BaseState<CheckQuestionsResponse>? submission,
+    int? currentQuestionIndex,
+    Map<String, String>? selectedAnswers,
+    bool? isSubmitting,
+    int? remainingTime,
+  }) {
+    return ExamPageState(
+      questions: questions ?? this.questions,
+      submission: submission ?? this.submission,
+      currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
+      selectedAnswers: selectedAnswers ?? this.selectedAnswers,
+      isSubmitting: isSubmitting ?? this.isSubmitting,
+      remainingTime: remainingTime ?? this.remainingTime,
+    );
+  }
 
-class ExamPageLoaded extends ExamPageState {
-  QuestionsResponse? questions;
-
-  ExamPageLoaded({this.questions});
+  @override
+  List<Object?> get props => [
+    questions,
+    submission,
+    currentQuestionIndex,
+    selectedAnswers,
+    isSubmitting,
+    remainingTime,
+  ];
 }
-
-class SubmitExam extends ExamPageState {
-  CheckQuestionsResponse checkQuestionsResponse;
-  SubmitExam(this.checkQuestionsResponse);
-}
-
-class ExamPageError extends ExamPageState {
-  final String message;
-
-  ExamPageError({required this.message});
-}
-
-class ExamTimerTick extends ExamPageState {
-  final int secondsLeft;
-  ExamTimerTick(this.secondsLeft);
-}
-
-class ExamTimerFinished extends ExamPageState {}

@@ -1,77 +1,66 @@
+// exam_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:online_exam/core/base_state/base_state.dart';
 import 'package:online_exam/core/di/di.dart';
 import 'package:online_exam/core/utils/app_assets.dart';
 import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
+import 'package:online_exam/features/questions/data/model/questions_response.dart';
+import 'package:online_exam/features/questions/presentation/view/exam_score_page.dart';
 import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart';
+import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_event.dart';
 import 'package:online_exam/features/questions/presentation/view_model/exam_page_cubit/exam_page_state.dart';
 import 'package:online_exam/features/questions/presentation/widgets/answers_list.dart';
 import 'package:online_exam/features/questions/presentation/widgets/change_questions_buttons.dart';
 
-class ExamPage extends StatefulWidget {
+class ExamPage extends StatelessWidget {
   static const String routeName = 'exam_page';
+
   const ExamPage({super.key});
 
   @override
-  State<ExamPage> createState() => _ExamPageState();
-}
-
-class _ExamPageState extends State<ExamPage> {
-  late ExamPageCubit examCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    examCubit = getIt<ExamPageCubit>();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final examArg = ModalRoute.of(context)!.settings.arguments as ExamsEntity;
+    final exam = ModalRoute.of(context)!.settings.arguments as ExamsEntity;
 
     return BlocProvider(
-      create: (_) => examCubit..getQuestions(examArg.id.toString()),
+      create: (_) =>
+          getIt<ExamPageCubit>()
+            ..doIntent(LoadQuestionsIntent(exam.id!)), // MVI Intent
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            color: Colors.black,
             icon: SvgPicture.asset(AppAssets.arrowBackIos),
-
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text("Are you sure you want to quit?"),
-                    actions: [
-                      TextButton(
-                        child: const Text("No"),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      TextButton(
-                        child: const Text("Yes"),
-                        onPressed: () => Navigator.popAndPushNamed(
-                          context,
-                          LanguageView.routeName,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
+            onPressed: () => _showQuitDialog(context),
           ),
           title: const Text("Exam", style: TextStyles.medium20),
           actions: [
             Row(
               children: [
-                Image.asset(AppAssets.alarm, fit: BoxFit.cover),
+                Image.asset(AppAssets.alarm, width: 24, height: 24),
                 SizedBox(width: 8),
-                Text("00:05", style: TextStyles.regular12),
+                BlocBuilder<ExamPageCubit, ExamPageState>(
+                  builder: (context, state) {
+                    final mins = (state.remainingTime ~/ 60).toString().padLeft(
+                      2,
+                      '0',
+                    );
+                    final secs = (state.remainingTime % 60).toString().padLeft(
+                      2,
+                      '0',
+                    );
+                    final color = state.remainingTime <= 60
+                        ? Colors.red
+                        : AppColors.lightGreen;
+                    return Text(
+                      "$mins:$secs",
+                      style: TextStyles.medium18.copyWith(color: color),
+                    );
+                  },
+                ),
                 SizedBox(width: 20),
               ],
             ),
@@ -79,67 +68,125 @@ class _ExamPageState extends State<ExamPage> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: BlocBuilder<ExamPageCubit, ExamPageState>(
-            builder: (context, state) {
-              if (state is ExamPageLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(color: AppColors.blueBase),
+          child: BlocConsumer<ExamPageCubit, ExamPageState>(
+            listener: (context, state) {
+              if (state.submission is SuccessState) {
+                Navigator.pushReplacementNamed(
+                  context,
+                  ExamScorePage.routeName,
+                  arguments: (state.submission as SuccessState).data,
                 );
               }
 
-              if (state is ExamPageError) {
-                return Center(
-                  child: Text(
-                    'Error: ${state.message}',
-                    style: TextStyles.medium16,
+              if (state.submission is FailureState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text((state.submission as FailureState).message),
+                    backgroundColor: Colors.red,
                   ),
                 );
               }
-
-              if (state is ExamPageLoaded) {
-                final cubit = context.read<ExamPageCubit>();
-                final question =
-                    state.questions!.questions![cubit.indexOfQuestion];
-                final answers = question.answers ?? [];
-                final questionId = question.Id.toString();
-
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        'Question ${cubit.indexOfQuestion + 1} of ${state.questions!.questions!.length}',
-                        style: TextStyles.medium16,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    LinearProgressIndicator(
-                      borderRadius: BorderRadius.circular(3),
-                      color: AppColors.gray,
-                      valueColor: AlwaysStoppedAnimation(AppColors.blueBase),
-                      value:
-                          (cubit.indexOfQuestion + 1) /
-                          state.questions!.questions!.length,
-                    ),
-                    SizedBox(height: 10),
-                    Text(question.question ?? "", style: TextStyles.medium16),
-                    const SizedBox(height: 10),
-                    Expanded(
-                      child: AnswersList(
-                        answers: answers,
-                        cubit: cubit,
-                        questionId: questionId,
-                      ),
-                    ),
-                    Expanded(child: ChangeQuestionsButtons()),
-                  ],
-                );
-              }
-
-              return const SizedBox.shrink();
+            },
+            builder: (context, state) {
+              return switch (state.questions) {
+                IdleState() || LoadingState() => const Center(
+                  child: CircularProgressIndicator(color: AppColors.blue100),
+                ),
+                FailureState(:final message) => Center(
+                  child: Text(
+                    message,
+                    style: TextStyles.medium16.copyWith(color: Colors.red),
+                  ),
+                ),
+                SuccessState(:final data) => _buildExamBody(
+                  context,
+                  state,
+                  data,
+                ),
+              };
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildExamBody(
+    BuildContext context,
+    ExamPageState state,
+    QuestionsResponse response,
+  ) {
+    final questions = response.questions!;
+    final currentQuestion = questions[state.currentQuestionIndex];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Progress Header
+        Center(
+          child: Text(
+            'Question ${state.currentQuestionIndex + 1} of ${questions.length}',
+            style: TextStyles.medium16,
+          ),
+        ),
+        const SizedBox(height: 10),
+
+        LinearProgressIndicator(
+          value: (state.currentQuestionIndex + 1) / questions.length,
+          backgroundColor: AppColors.black10,
+          valueColor: const AlwaysStoppedAnimation(AppColors.blueBase),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        const SizedBox(height: 10),
+
+        // Question Text
+        Text(
+          currentQuestion.question ?? "No question text",
+          style: TextStyles.medium16,
+        ),
+        const SizedBox(height: 10),
+
+        // Answers List
+        Expanded(
+          child: AnswersList(
+            answers: currentQuestion.answers ?? [],
+            questionId: currentQuestion.Id.toString(),
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // Navigation Buttons
+        Expanded(child: const ChangeQuestionsButtons()),
+      ],
+    );
+  }
+
+  void _showQuitDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Quit Exam?"),
+        content: const Text(
+          "Are you sure you want to leave the exam? Your progress will be lost.",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                LanguageView.routeName,
+                (route) => false,
+              );
+            },
+            child: const Text("Quit", style: TextStyle(color: Colors.red)),
+          ),
+        ],
       ),
     );
   }
