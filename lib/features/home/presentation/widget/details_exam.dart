@@ -4,6 +4,7 @@ import 'package:online_exam/core/utils/app_colors.dart';
 import 'package:online_exam/core/utils/text_styles.dart';
 import 'package:online_exam/core/widgets/custom_elevated_button.dart';
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart';
+import 'package:online_exam/features/questions/presentation/view/exam_page.dart';
 
 class DetailsExamLevel extends StatelessWidget {
   static const String routeName = "Details-Exam-Level";
@@ -11,7 +12,7 @@ class DetailsExamLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-var examArg=    ModalRoute.of(context)!.settings.arguments as ExamsEntity;
+    var examArg = ModalRoute.of(context)!.settings.arguments as ExamsEntity;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -44,7 +45,10 @@ var examArg=    ModalRoute.of(context)!.settings.arguments as ExamsEntity;
               children: [
                 Text("${examArg.title}", style: TextStyles.medium16),
                 SizedBox(height: 19, child: VerticalDivider()),
-                Text("${examArg.numberOfQuestions} Question", style: TextStyles.regular14),
+                Text(
+                  "${examArg.numberOfQuestions} Question",
+                  style: TextStyles.regular14,
+                ),
               ],
             ),
             SizedBox(height: 40),
@@ -52,15 +56,21 @@ var examArg=    ModalRoute.of(context)!.settings.arguments as ExamsEntity;
             SizedBox(height: 16),
             _columnOfInstructions(),
             SizedBox(height: 48),
-            _startExamButton(),
+            _startExamButton(
+              () => Navigator.pushReplacementNamed(
+                context,
+                ExamPage.routeName,
+                arguments: examArg,
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _startExamButton() {
-    return CustomElevatedButton(textOnButton: "Start", onPressed: () {});
+  Widget _startExamButton(void Function()? onPressed) {
+    return CustomElevatedButton(textOnButton: "Start", onPressed: onPressed);
   }
 
   Widget _columnOfInstructions() {

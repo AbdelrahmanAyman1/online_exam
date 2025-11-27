@@ -6,6 +6,10 @@ import 'package:online_exam/features/auth/data/model/reset_password_request.dart
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart';
 import 'package:online_exam/features/home/data/model/exam_model_dto.dart';
+import 'package:online_exam/features/questions/data/model/answer_check_dto.dart';
+import 'package:online_exam/features/questions/data/model/check_questions_request.dart';
+import 'package:online_exam/features/questions/data/model/check_questions_response.dart';
+import 'package:online_exam/features/questions/data/model/questions_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_response_dto.dart';
 part 'api_client.g.dart';
@@ -40,5 +44,13 @@ abstract class ApiClient {
   @GET(EndPoints.exam)
   Future<ExamsResponseModelDto> getAllExamBySubject(
     @Query('subject') String subject,
+  );
+
+  @GET(EndPoints.getQuestions)
+  Future<QuestionsResponse> getQuestions(@Query("exam") String examId);
+
+  @POST(EndPoints.questionCheck)
+  Future<CheckQuestionsResponse> checkQuestions(
+    @Body() CheckQuestionsRequest checkQuestionsRequest,
   );
 }
