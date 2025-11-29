@@ -3,24 +3,30 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:online_exam/core/api/api_client.dart' as _i4;
+import 'package:online_exam/core/api/api_client.dart' as _i5;
 import 'package:online_exam/features/auth/data/model/forget_password_request_model.dart'
-    as _i8;
+    as _i9;
 import 'package:online_exam/features/auth/data/model/login_request_model.dart'
-    as _i7;
+    as _i8;
 import 'package:online_exam/features/auth/data/model/reset_password_request.dart'
-    as _i10;
+    as _i11;
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart'
-    as _i6;
+    as _i7;
 import 'package:online_exam/features/auth/data/model/sign_up_response_dto.dart'
     as _i2;
 import 'package:online_exam/features/auth/data/model/verify_reset_code_request_model.dart'
-    as _i9;
+    as _i10;
 import 'package:online_exam/features/home/data/model/exam_model_dto.dart'
     as _i3;
+import 'package:online_exam/features/profile/data/model/change_password_request.dart'
+    as _i13;
+import 'package:online_exam/features/profile/data/model/update_request_dto.dart'
+    as _i12;
+import 'package:online_exam/features/profile/data/model/user_info_dto.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -35,7 +41,6 @@ import 'package:online_exam/features/home/data/model/exam_model_dto.dart'
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
-// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeSignUpResponseDto_0 extends _i1.SmartFake
     implements _i2.SignUpResponseDto {
@@ -49,51 +54,56 @@ class _FakeExamsResponseModelDto_1 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeUserInfoDto_2 extends _i1.SmartFake implements _i4.UserInfoDto {
+  _FakeUserInfoDto_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [ApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockApiClient extends _i1.Mock implements _i4.ApiClient {
+class MockApiClient extends _i1.Mock implements _i5.ApiClient {
   MockApiClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.SignUpResponseDto> signUp(
-    _i6.SignUpRequestModel? signUpRequestModel,
+  _i6.Future<_i2.SignUpResponseDto> signUp(
+    _i7.SignUpRequestModel? signUpRequestModel,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#signUp, [signUpRequestModel]),
-            returnValue: _i5.Future<_i2.SignUpResponseDto>.value(
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
               _FakeSignUpResponseDto_0(
                 this,
                 Invocation.method(#signUp, [signUpRequestModel]),
               ),
             ),
           )
-          as _i5.Future<_i2.SignUpResponseDto>);
+          as _i6.Future<_i2.SignUpResponseDto>);
 
   @override
-  _i5.Future<_i2.SignUpResponseDto> signIn(
-    _i7.LoginRequestModel? loginRequestModel,
+  _i6.Future<_i2.SignUpResponseDto> signIn(
+    _i8.LoginRequestModel? loginRequestModel,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#signIn, [loginRequestModel]),
-            returnValue: _i5.Future<_i2.SignUpResponseDto>.value(
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
               _FakeSignUpResponseDto_0(
                 this,
                 Invocation.method(#signIn, [loginRequestModel]),
               ),
             ),
           )
-          as _i5.Future<_i2.SignUpResponseDto>);
+          as _i6.Future<_i2.SignUpResponseDto>);
 
   @override
-  _i5.Future<_i2.SignUpResponseDto> forgetPassword(
-    _i8.ForgetPasswordRequestModel? forgetPasswordRequestModel,
+  _i6.Future<_i2.SignUpResponseDto> forgetPassword(
+    _i9.ForgetPasswordRequestModel? forgetPasswordRequestModel,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#forgetPassword, [forgetPasswordRequestModel]),
-            returnValue: _i5.Future<_i2.SignUpResponseDto>.value(
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
               _FakeSignUpResponseDto_0(
                 this,
                 Invocation.method(#forgetPassword, [
@@ -102,15 +112,15 @@ class MockApiClient extends _i1.Mock implements _i4.ApiClient {
               ),
             ),
           )
-          as _i5.Future<_i2.SignUpResponseDto>);
+          as _i6.Future<_i2.SignUpResponseDto>);
 
   @override
-  _i5.Future<_i2.SignUpResponseDto> verifyResetCode(
-    _i9.VerifyResetCodeRequestModel? verifyResetCodeRequestModel,
+  _i6.Future<_i2.SignUpResponseDto> verifyResetCode(
+    _i10.VerifyResetCodeRequestModel? verifyResetCodeRequestModel,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#verifyResetCode, [verifyResetCodeRequestModel]),
-            returnValue: _i5.Future<_i2.SignUpResponseDto>.value(
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
               _FakeSignUpResponseDto_0(
                 this,
                 Invocation.method(#verifyResetCode, [
@@ -119,33 +129,73 @@ class MockApiClient extends _i1.Mock implements _i4.ApiClient {
               ),
             ),
           )
-          as _i5.Future<_i2.SignUpResponseDto>);
+          as _i6.Future<_i2.SignUpResponseDto>);
 
   @override
-  _i5.Future<_i2.SignUpResponseDto> resetPassword(
-    _i10.ResetPasswordRequest? resetPasswordRequest,
+  _i6.Future<_i2.SignUpResponseDto> resetPassword(
+    _i11.ResetPasswordRequest? resetPasswordRequest,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#resetPassword, [resetPasswordRequest]),
-            returnValue: _i5.Future<_i2.SignUpResponseDto>.value(
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
               _FakeSignUpResponseDto_0(
                 this,
                 Invocation.method(#resetPassword, [resetPasswordRequest]),
               ),
             ),
           )
-          as _i5.Future<_i2.SignUpResponseDto>);
+          as _i6.Future<_i2.SignUpResponseDto>);
 
   @override
-  _i5.Future<_i3.ExamsResponseModelDto> getAllExamBySubject(String? subject) =>
+  _i6.Future<_i3.ExamsResponseModelDto> getAllExamBySubject(String? subject) =>
       (super.noSuchMethod(
             Invocation.method(#getAllExamBySubject, [subject]),
-            returnValue: _i5.Future<_i3.ExamsResponseModelDto>.value(
+            returnValue: _i6.Future<_i3.ExamsResponseModelDto>.value(
               _FakeExamsResponseModelDto_1(
                 this,
                 Invocation.method(#getAllExamBySubject, [subject]),
               ),
             ),
           )
-          as _i5.Future<_i3.ExamsResponseModelDto>);
+          as _i6.Future<_i3.ExamsResponseModelDto>);
+
+  @override
+  _i6.Future<_i4.UserInfoDto> getProfileInfo() =>
+      (super.noSuchMethod(
+            Invocation.method(#getProfileInfo, []),
+            returnValue: _i6.Future<_i4.UserInfoDto>.value(
+              _FakeUserInfoDto_2(this, Invocation.method(#getProfileInfo, [])),
+            ),
+          )
+          as _i6.Future<_i4.UserInfoDto>);
+
+  @override
+  _i6.Future<_i4.UserInfoDto> editProfileInfo(
+    _i12.UpdateUserModel? userUpdata,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#editProfileInfo, [userUpdata]),
+            returnValue: _i6.Future<_i4.UserInfoDto>.value(
+              _FakeUserInfoDto_2(
+                this,
+                Invocation.method(#editProfileInfo, [userUpdata]),
+              ),
+            ),
+          )
+          as _i6.Future<_i4.UserInfoDto>);
+
+  @override
+  _i6.Future<_i2.SignUpResponseDto> changePassword(
+    _i13.ChangePasswordRequest? changePasswordRequest,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#changePassword, [changePasswordRequest]),
+            returnValue: _i6.Future<_i2.SignUpResponseDto>.value(
+              _FakeSignUpResponseDto_0(
+                this,
+                Invocation.method(#changePassword, [changePasswordRequest]),
+              ),
+            ),
+          )
+          as _i6.Future<_i2.SignUpResponseDto>);
 }

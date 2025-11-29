@@ -15,6 +15,7 @@ import 'package:online_exam/features/home/presentation/view_model/get_all_exam_b
 import 'package:online_exam/features/home/presentation/view_model/get_all_exam_by_subject/exam_view_model.dart';
 import 'package:online_exam/features/home/presentation/widget/details_exam.dart';
 import 'package:online_exam/features/home/presentation/widget/language_view.dart';
+import 'package:online_exam/features/profile/presenstation/view/reset_password_profile_view.dart';
 
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
@@ -24,7 +25,7 @@ class OnlineExamApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: isUserLoggedIn
-          ? LanguageView.routeName
+          ? AppSection.routeName
           : LoginView.routeName,
       routes: {
         LanguageView.routeName: (context) => BlocProvider(
@@ -34,6 +35,7 @@ class OnlineExamApp extends StatelessWidget {
           child: const LanguageView(),
         ),
         AppSection.routeName: (context) => const AppSection(),
+        ResetPasswordProfile.routeName: (context) => const ResetPasswordProfile(),
         DetailsExamLevel.routeName: (context) => const DetailsExamLevel(),
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
@@ -43,6 +45,7 @@ class OnlineExamApp extends StatelessWidget {
           create: (context) => GetIt.instance.get<LoginCubit>(),
           child: const LoginView(),
         ),
+
         ForgetPasswordView.routeName: (context) => MultiBlocProvider(
           providers: [
             BlocProvider(

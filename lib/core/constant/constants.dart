@@ -1,5 +1,3 @@
-
-
 bool isUserLoggedIn = false;
 
 class SharedKeys {
@@ -13,4 +11,7 @@ abstract class EndPoints {
   static const String verifyResetCode = 'auth/verifyResetCode';
   static const String resetPassword = 'auth/resetPassword';
   static const String exam = 'exams';
+  static const String getProfileInfo = 'auth/profileData';
+  static const String editProfileInfo = 'auth/editProfile';
+  static const String changePassword = 'auth/changePassword';
 }
