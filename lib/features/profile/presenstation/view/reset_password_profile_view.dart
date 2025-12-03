@@ -103,10 +103,12 @@ class _ResetPasswordProfileState extends State<ResetPasswordProfile> {
                             : null,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            context.read<ProfileViewModel>().changePassword(
-                              _currentPassword.text,
-                              _newPassword.text,
-                              _confirmPassword.text,
+                            context.read<ProfileViewModel>().doIntent(
+                              ChangePasswordEvent(
+                                oldPassword: _currentPassword.text,
+                                newPassword: _newPassword.text,
+                                rePassword: _confirmPassword.text,
+                              ),
                             );
                           }
                         },

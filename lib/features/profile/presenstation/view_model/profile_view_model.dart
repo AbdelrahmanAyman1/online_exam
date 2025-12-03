@@ -26,7 +26,22 @@ class ProfileViewModel extends Cubit<ProfileState> {
         ),
       );
 
-  void getProfileInfo() async {
+  void doIntent(Intent intent) {
+    switch (intent) {
+      case ChangePasswordEvent():
+        _changePassword(
+          intent.oldPassword,
+          intent.newPassword,
+          intent.rePassword,
+        );
+      case ChangeProfileUpdateEvent():
+        _editProfileInfo(intent.entity);
+      case GetProfileInfoEvent():
+        _getProfileInfo();
+    }
+  }
+
+  void _getProfileInfo() async {
     emit(state.copyWith(profileInfo: StateBox.loading()));
     var res = await _getProfileInfoUcecase.call();
     switch (res) {
@@ -41,7 +56,7 @@ class ProfileViewModel extends Cubit<ProfileState> {
     }
   }
 
-  void editProfileInfo(UserEntity entity) async {
+  void _editProfileInfo(UserEntity entity) async {
     emit(state.copyWith(updateProfileInfo: StateBox.loading()));
     var res = await _editProfileInfoUcecase.call(entity);
     switch (res) {
@@ -60,7 +75,7 @@ class ProfileViewModel extends Cubit<ProfileState> {
     }
   }
 
-  void changePassword(
+  void _changePassword(
     String oldPassword,
     String password,
     String rePassword,
@@ -85,3 +100,25 @@ class ProfileViewModel extends Cubit<ProfileState> {
     }
   }
 }
+
+sealed class Intent {}
+
+final class ChangePasswordEvent extends Intent {
+  final String oldPassword;
+  final String newPassword;
+  final String rePassword;
+
+  ChangePasswordEvent({
+    required this.oldPassword,
+    required this.newPassword,
+    required this.rePassword,
+  });
+}
+
+final class ChangeProfileUpdateEvent extends Intent {
+  final UserEntity entity;
+
+  ChangeProfileUpdateEvent({required this.entity});
+}
+
+final class GetProfileInfoEvent extends Intent {}

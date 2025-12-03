@@ -55,7 +55,8 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<ProfileViewModel>()..getProfileInfo(),
+      create: (context) =>
+          getIt.get<ProfileViewModel>()..doIntent(GetProfileInfoEvent()),
       child: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -212,8 +213,8 @@ class _ProfileViewState extends State<ProfileView> {
                           phoneNumber: _phoneNumberController.text,
                           userName: _userNameController.text,
                         );
-                        context.read<ProfileViewModel>().editProfileInfo(
-                          userUpdata,
+                        context.read<ProfileViewModel>().doIntent(
+                          ChangeProfileUpdateEvent(entity: userUpdata),
                         );
                       }
                     },
