@@ -195,25 +195,25 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<QuestionsResponse> getQuestions(String examId) async {
+  Future<UserInfoDto> getProfileInfo() async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'exam': examId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<QuestionsResponse>(
+    final _options = _setStreamType<UserInfoDto>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'questions',
+            'auth/profileData',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late QuestionsResponse _value;
+    late UserInfoDto _value;
     try {
-      _value = QuestionsResponse.fromJson(_result.data!);
+      _value = UserInfoDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -222,28 +222,56 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CheckQuestionsResponse> checkQuestions(
-    CheckQuestionsRequest checkQuestionsRequest,
-  ) async {
+  Future<UserInfoDto> editProfileInfo(UpdateUserModel userUpdata) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(checkQuestionsRequest.toJson());
-    final _options = _setStreamType<CheckQuestionsResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+    _data.addAll(userUpdata.toJson());
+    final _options = _setStreamType<UserInfoDto>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'questions/check',
+            'auth/editProfile',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CheckQuestionsResponse _value;
+    late UserInfoDto _value;
     try {
-      _value = CheckQuestionsResponse.fromJson(_result.data!);
+      _value = UserInfoDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SignUpResponseDto> changePassword(
+    ChangePasswordRequest changePasswordRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(changePasswordRequest.toJson());
+    final _options = _setStreamType<SignUpResponseDto>(
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'auth/changePassword',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SignUpResponseDto _value;
+    try {
+      _value = SignUpResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

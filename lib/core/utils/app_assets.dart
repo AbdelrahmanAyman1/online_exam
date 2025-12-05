@@ -38,5 +38,5 @@ abstract class AppAssets {
   static const String appLogo = '${baseImagePath}app_logo.png';
   static const String android12splash = '${baseImagePath}android12splash.png';
   static const String profit = '${baseImagePath}Profit.png';
-  static const String alarm = '${baseImagePath}alarm.png';
+  static const String profile = '${baseImagePath}profile.png';
 }

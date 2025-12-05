@@ -1,5 +1,5 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format width=80
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
 // InjectableConfigGenerator
@@ -46,18 +46,20 @@ import '../../features/home/domain/usecase/get_exam_on_subject_usecase.dart'
     as _i685;
 import '../../features/home/presentation/view_model/get_all_exam_by_subject/exam_view_model.dart'
     as _i1035;
-import '../../features/questions/data/data_source/questions_data_source.dart'
-    as _i269;
-import '../../features/questions/data/data_source/questions_data_source_impl.dart'
-    as _i161;
-import '../../features/questions/data/repo/exam_page_repo_impl.dart' as _i500;
-import '../../features/questions/domain/repo/exam_page_repo.dart' as _i406;
-import '../../features/questions/domain/use_case/check_questions_use_case.dart'
-    as _i561;
-import '../../features/questions/domain/use_case/get_questions_use_case.dart'
-    as _i1061;
-import '../../features/questions/presentation/view_model/exam_page_cubit/exam_page_cubit.dart'
-    as _i384;
+import '../../features/profile/data/datasourse/remote_profile_data_sourse.dart'
+    as _i62;
+import '../../features/profile/data/datasourse/remote_profile_data_sourse_impl.dart'
+    as _i920;
+import '../../features/profile/data/repo/profile_repo_impl.dart' as _i256;
+import '../../features/profile/domain/repo/profile_repo.dart' as _i364;
+import '../../features/profile/domain/usecase/change_password_usecase.dart'
+    as _i501;
+import '../../features/profile/domain/usecase/edit_user_profile_info_usecase.dart'
+    as _i87;
+import '../../features/profile/domain/usecase/get_user_profile_info_usecase.dart'
+    as _i859;
+import '../../features/profile/presenstation/view_model/profile_view_model.dart'
+    as _i518;
 import '../api/api_client.dart' as _i277;
 import '../api/api_module.dart' as _i0;
 
@@ -83,14 +85,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i617.RemoteDataSourse>(
       () => _i542.RemoteDataSourseImpl(gh<_i277.ApiClient>()),
     );
+    gh.lazySingleton<_i62.RemoteProfileDataSourse>(
+      () => _i920.RemoteProfileDataSourseImpl(gh<_i277.ApiClient>()),
+    );
     gh.lazySingleton<_i358.OnLineDataSoures>(
       () => _i914.OnlineDataSourseImpl(gh<_i277.ApiClient>()),
     );
     gh.lazySingleton<_i170.AuthRepo>(
       () => _i39.AuthRepoImp(gh<_i358.OnLineDataSoures>()),
     );
-    gh.factory<_i269.QuestionsDataSource>(
-      () => _i161.QuestionsDataSourceImpl(gh<_i277.ApiClient>()),
+    gh.lazySingleton<_i364.ProfileRepo>(
+      () => _i256.ProfileRepoImpl(gh<_i62.RemoteProfileDataSourse>()),
     );
     gh.lazySingleton<_i16.ForgetPasswordUseCase>(
       () => _i16.ForgetPasswordUseCase(gh<_i170.AuthRepo>()),
@@ -110,6 +115,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i377.ExamRepo>(
       () => _i521.ExamOnSubjectRepoImpl(gh<_i617.RemoteDataSourse>()),
     );
+    gh.lazySingleton<_i859.GetProfileInfoUcecase>(
+      () => _i859.GetProfileInfoUcecase(gh<_i364.ProfileRepo>()),
+    );
+    gh.lazySingleton<_i87.EditProfileInfoUcecase>(
+      () => _i87.EditProfileInfoUcecase(gh<_i364.ProfileRepo>()),
+    );
+    gh.factory<_i501.ChangePasswordUseCase>(
+      () => _i501.ChangePasswordUseCase(gh<_i364.ProfileRepo>()),
+    );
     gh.factory<_i1043.ForgetPasswordCubit>(
       () => _i1043.ForgetPasswordCubit(gh<_i16.ForgetPasswordUseCase>()),
     );
@@ -128,11 +142,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i925.LoginCubit>(
       () => _i925.LoginCubit(gh<_i391.LoginUseCase>()),
     );
-    gh.factory<_i561.CheckQuestionsUseCase>(
-      () => _i561.CheckQuestionsUseCase(gh<_i406.ExamPageRepo>()),
-    );
-    gh.factory<_i1061.GetQuestionsUseCase>(
-      () => _i1061.GetQuestionsUseCase(gh<_i406.ExamPageRepo>()),
+    gh.factory<_i518.ProfileViewModel>(
+      () => _i518.ProfileViewModel(
+        gh<_i859.GetProfileInfoUcecase>(),
+        gh<_i87.EditProfileInfoUcecase>(),
+        gh<_i501.ChangePasswordUseCase>(),
+      ),
     );
     gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
       () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
