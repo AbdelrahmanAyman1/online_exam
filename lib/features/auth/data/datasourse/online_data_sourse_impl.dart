@@ -21,7 +21,7 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   Future<Result<AuthResponseModel>> signUp(
     SignUpRequestModel singUpRequestModel,
   ) async {
-    return excuteApi<AuthResponseModel>(() async {
+    return executeApi<AuthResponseModel>(() async {
       var response = await _apiClient.signUp(singUpRequestModel);
       return response.toModel();
     });
@@ -31,7 +31,7 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   Future<Result<AuthResponseModel>> signIn(
     LoginRequestModel loginRequestModel,
   ) async {
-    return excuteApi<AuthResponseModel>(() async {
+    return executeApi<AuthResponseModel>(() async {
       var response = await _apiClient.signIn(loginRequestModel);
       return response.toModel();
     });
@@ -41,7 +41,7 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   Future<Result<AuthResponseModel>> forgetPassword(
     ForgetPasswordRequestModel forgetPasswordRequestModel,
   ) async {
-    return excuteApi<AuthResponseModel>(() async {
+    return executeApi<AuthResponseModel>(() async {
       var response = await _apiClient.forgetPassword(
         forgetPasswordRequestModel,
       );
@@ -53,7 +53,7 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   Future<Result<AuthResponseModel>> verifyResetCode(
     VerifyResetCodeRequestModel verifyResetCodeRequestModel,
   ) async {
-    return excuteApi<AuthResponseModel>(() async {
+    return executeApi<AuthResponseModel>(() async {
       var response = await _apiClient.verifyResetCode(
         verifyResetCodeRequestModel,
       );
@@ -65,7 +65,7 @@ class OnlineDataSourseImpl implements OnLineDataSoures {
   Future<Result<AuthResponseModel>> resetPassword(
     ResetPasswordRequest resetPasswordRequest,
   ) async {
-    return excuteApi<AuthResponseModel>(() async {
+    return executeApi<AuthResponseModel>(() async {
       var response = await _apiClient.resetPassword(resetPasswordRequest);
       return response.toModel();
     });

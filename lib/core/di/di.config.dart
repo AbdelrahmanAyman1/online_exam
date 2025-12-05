@@ -130,6 +130,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i134.SignUpUsecase>(
       () => _i134.SignUpUsecase(gh<_i170.AuthRepo>()),
     );
+    gh.factory<_i406.ExamPageRepo>(
+      () => _i500.ExamPageRepoImpl(gh<_i269.QuestionsDataSource>()),
+    );
     gh.factory<_i451.VerifyResetCodeCubit>(
       () => _i451.VerifyResetCodeCubit(gh<_i1040.VerifyResetCodeUseCase>()),
     );
@@ -148,6 +151,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
       () => _i685.GetExamOnSubjectUsecase(gh<_i377.ExamRepo>()),
+    );
+    gh.factory<_i384.ExamPageCubit>(
+      () => _i384.ExamPageCubit(
+        gh<_i1061.GetQuestionsUseCase>(),
+        gh<_i561.CheckQuestionsUseCase>(),
+      ),
     );
     gh.factory<_i1035.ExamViewModel>(
       () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),

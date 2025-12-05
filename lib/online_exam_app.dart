@@ -28,6 +28,10 @@ class OnlineExamApp extends StatelessWidget {
           ? AppSection.routeName
           : LoginView.routeName,
       routes: {
+        ExamPage.routeName: (context) => BlocProvider(
+          create: (context) => GetIt.instance.get<ExamPageCubit>(),
+          child: const ExamPage(),
+        ),
         LanguageView.routeName: (context) => BlocProvider(
           create: (context) =>
               GetIt.instance.get<ExamViewModel>()
@@ -37,10 +41,12 @@ class OnlineExamApp extends StatelessWidget {
         AppSection.routeName: (context) => const AppSection(),
         ResetPasswordProfile.routeName: (context) => const ResetPasswordProfile(),
         DetailsExamLevel.routeName: (context) => const DetailsExamLevel(),
+
         SignUpView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<SignUpCubit>(),
           child: const SignUpView(),
         ),
+
         LoginView.routeName: (context) => BlocProvider(
           create: (context) => GetIt.instance.get<LoginCubit>(),
           child: const LoginView(),
@@ -51,15 +57,19 @@ class OnlineExamApp extends StatelessWidget {
             BlocProvider(
               create: (context) => GetIt.instance.get<ForgetPasswordCubit>(),
             ),
+
             BlocProvider(
               create: (context) => GetIt.instance.get<VerifyResetCodeCubit>(),
             ),
+
             BlocProvider(
               create: (context) => GetIt.instance.get<ResetPasswordCubit>(),
             ),
           ],
           child: const ForgetPasswordView(),
         ),
+
+        ExamScorePage.routeName: (context) => const ExamScorePage(),
       },
     );
   }

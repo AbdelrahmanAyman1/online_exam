@@ -4,7 +4,7 @@ const String baseImagePath = 'assets/images/';
 abstract class AppAssets {
   static const String addIcon = '${baseSvgImagePath}add.svg';
   static const String addressIcon = '${baseSvgImagePath}address.svg';
-  static const String alarmClockIcon = '${baseSvgImagePath}alarm-clock.svg';
+  static const String alarmClockIcon = '${baseSvgImagePath}alarm_clock.svg';
   static const String arrowBackIos = '${baseSvgImagePath}arrow_back_ios.svg';
   static const String resultInActiveIcon =
       '${baseSvgImagePath}result_inactive.svg';
