@@ -10,14 +10,14 @@ import 'package:online_exam/features/home/domain/repo/get_exam_on_subject_repo.d
 
 import 'exam_on_subject_repo_impl_test.mocks.dart';
 
-@GenerateMocks([RemoteDataSourse])
+@GenerateMocks([RemoteDataSource])
 void main() {
-  late RemoteDataSourse mockDataSourse;
-  late ExamRepo examRepo;
+  late RemoteDataSource mockDataSourse;
+  late HomeRepo examRepo;
 
   setUp(() {
     mockDataSourse = MockRemoteDataSourse();
-    examRepo = ExamOnSubjectRepoImpl(mockDataSourse);
+    examRepo = HomeRepoImpl(mockDataSourse);
   });
   test(
     'should return list of exam entity when get all exam by subject in repo impl  is successfuly',
@@ -33,11 +33,13 @@ void main() {
         mockDataSourse.getAllExamBySubject(tSubject),
       ).thenAnswer((_) async => successResponse);
       //act
-      var result = await examRepo.getAllExamBySubject(tSubject)as Success<List<ExamsEntity>>;
+      var result =
+          await examRepo.getAllExamBySubject(tSubject)
+              as Success<List<ExamsEntity>>;
       //assert
       expect(result, isA<Success<List<ExamsEntity>>>());
-      expect(result.data[0],tExamEntity[0]);
-      expect(result.data[0].id,tExamEntity[0].id);
+      expect(result.data[0], tExamEntity[0]);
+      expect(result.data[0].id, tExamEntity[0].id);
     },
   );
   test(
@@ -51,12 +53,13 @@ void main() {
         mockDataSourse.getAllExamBySubject(tSubject),
       ).thenAnswer((_) async => failureResponse);
       //act
-      var result = await examRepo.getAllExamBySubject(tSubject) as Failure<List<ExamsEntity>>;
+      var result =
+          await examRepo.getAllExamBySubject(tSubject)
+              as Failure<List<ExamsEntity>>;
       //assert
       expect(result, isA<Failure<List<ExamsEntity>>>());
       expect(result.exception, tError);
       expect(result.exception.message, equals("error"));
-
     },
   );
 }

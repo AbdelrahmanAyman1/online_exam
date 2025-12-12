@@ -14,7 +14,7 @@ import 'remote_data_sourse_impl_test.mocks.dart';
 
 @GenerateMocks([ApiClient])
 void main() {
-  late RemoteDataSourse remoteDataSourse;
+  late RemoteDataSource remoteDataSourse;
   late ApiClient mockApiClient;
   setUp(() {
     mockApiClient = MockApiClient();
@@ -46,7 +46,8 @@ void main() {
       expect(result.data[0], listOfExam[0]);
     },
   );
-  test('should return list of exam entity when api call  is successfuly but list is null',
+  test(
+    'should return list of exam entity when api call  is successfuly but list is null',
     () async {
       //arrange
       String tSubject = "subject1";

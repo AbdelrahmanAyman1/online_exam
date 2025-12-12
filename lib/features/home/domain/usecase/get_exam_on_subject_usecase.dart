@@ -5,7 +5,7 @@ import 'package:online_exam/features/home/domain/repo/get_exam_on_subject_repo.d
 
 @lazySingleton
 class GetExamOnSubjectUsecase {
-  final ExamRepo _examRepo;
+  final HomeRepo _examRepo;
   GetExamOnSubjectUsecase(this._examRepo);
 
   Future<Result<List<ExamsEntity>>> getAllExamBySubject(String subject) =>

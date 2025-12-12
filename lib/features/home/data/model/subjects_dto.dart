@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:online_exam/features/home/domain/entity/subjects_model.dart';
 
 part 'subjects_dto.g.dart';
 
@@ -11,11 +12,7 @@ class SubjectsDto {
   @JsonKey(name: "subjects")
   final List<Subjects>? subjects;
 
-  SubjectsDto ({
-    this.message,
-    this.metadata,
-    this.subjects,
-  });
+  SubjectsDto({this.message, this.metadata, this.subjects});
 
   factory SubjectsDto.fromJson(Map<String, dynamic> json) {
     return _$SubjectsDtoFromJson(json);
@@ -35,11 +32,7 @@ class Metadata {
   @JsonKey(name: "limit")
   final int? limit;
 
-  Metadata ({
-    this.currentPage,
-    this.numberOfPages,
-    this.limit,
-  });
+  Metadata({this.currentPage, this.numberOfPages, this.limit});
 
   factory Metadata.fromJson(Map<String, dynamic> json) {
     return _$MetadataFromJson(json);
@@ -61,12 +54,11 @@ class Subjects {
   @JsonKey(name: "createdAt")
   final String? createdAt;
 
-  Subjects ({
-    this.Id,
-    this.name,
-    this.icon,
-    this.createdAt,
-  });
+  Subjects({this.Id, this.name, this.icon, this.createdAt});
+
+  SubjectsModel toModel() {
+    return SubjectsModel(id: Id, name: name, icon: icon);
+  }
 
   factory Subjects.fromJson(Map<String, dynamic> json) {
     return _$SubjectsFromJson(json);
@@ -76,5 +68,3 @@ class Subjects {
     return _$SubjectsToJson(this);
   }
 }
-
-

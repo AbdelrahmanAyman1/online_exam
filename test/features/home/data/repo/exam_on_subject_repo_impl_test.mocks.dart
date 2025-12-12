@@ -30,7 +30,7 @@ import 'package:online_exam/features/home/domain/entity/exams_entity.dart'
 /// A class which mocks [RemoteDataSourse].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteDataSourse extends _i1.Mock implements _i2.RemoteDataSourse {
+class MockRemoteDataSourse extends _i1.Mock implements _i2.RemoteDataSource {
   MockRemoteDataSourse() {
     _i1.throwOnMissingStub(this);
   }

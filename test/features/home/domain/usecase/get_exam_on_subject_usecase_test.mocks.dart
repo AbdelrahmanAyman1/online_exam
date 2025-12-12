@@ -30,7 +30,7 @@ import 'package:online_exam/features/home/domain/repo/get_exam_on_subject_repo.d
 /// A class which mocks [ExamRepo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockExamRepo extends _i1.Mock implements _i2.ExamRepo {
+class MockExamRepo extends _i1.Mock implements _i2.HomeRepo {
   MockExamRepo() {
     _i1.throwOnMissingStub(this);
   }

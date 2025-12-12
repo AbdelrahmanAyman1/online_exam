@@ -16,13 +16,13 @@ class RemoteProfileDataSourseImpl implements RemoteProfileDataSourse {
 
   @override
   Future<Result<UserInfoDto>> getUserInfo() {
-    var response = excuteApi<UserInfoDto>(() => _apiClient.getProfileInfo());
+    var response = executeApi<UserInfoDto>(() => _apiClient.getProfileInfo());
     return response;
   }
 
   @override
   Future<Result<UserInfoDto>> editUserInfo(UpdateUserModel newUpdateUser) {
-    var response = excuteApi<UserInfoDto>(
+    var response = executeApi<UserInfoDto>(
       () => _apiClient.editProfileInfo(newUpdateUser),
     );
     return response;
@@ -32,7 +32,7 @@ class RemoteProfileDataSourseImpl implements RemoteProfileDataSourse {
   Future<Result<SignUpResponseDto>> changePassword(
     ChangePasswordRequest changePasswordRequest,
   ) {
-    return excuteApi<SignUpResponseDto>(
+    return executeApi<SignUpResponseDto>(
       () => _apiClient.changePassword(changePasswordRequest),
     );
   }

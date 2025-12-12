@@ -9,9 +9,9 @@ import 'package:online_exam/features/home/domain/usecase/get_exam_on_subject_use
 
 import 'get_exam_on_subject_usecase_test.mocks.dart';
 
-@GenerateMocks([ExamRepo])
+@GenerateMocks([HomeRepo])
 void main() {
-  late ExamRepo mockExamRepo;
+  late HomeRepo mockExamRepo;
   late GetExamOnSubjectUsecase getExamUsecase;
   setUp(() {
     mockExamRepo = MockExamRepo();
