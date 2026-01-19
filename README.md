@@ -1,24 +1,25 @@
 # Online Exam App
 
-A modern, scalable Flutter application for conducting and taking online examinations — built with Clean Architecture, feature-based structure, and production-ready practices.
+A modern, scalable Flutter application for conducting and taking online examinations — built with Clean Architecture, feature-first structure, and production-ready practices.
 
 [![Flutter](https://img.shields.io/badge/Flutter-≥3.0-blue?logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-≥3.0-blue?logo=dart&logoColor=white)](https://dart.dev)
 [![Architecture](https://img.shields.io/badge/Clean%20Architecture-✓-success)](#architecture)
-[![State%20Management](https://img.shields.io/badge/Bloc-orange)](#tech-stack)
+[![State Management](https://img.shields.io/badge/Bloc-orange)](#tech-stack)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
 
 Cross-platform mobile app that enables:
 
-- Students → browse subjects, take timed exams
-- Manage exams and questions
+- **Students** → browse subjects, take timed exams
+- **Teachers/Admins** → create & manage exams and questions
 - Secure authentication with role-based access
 - API integration, automatic grading & results (in progress)
 
-## Architecture (Clean + Feature-based)
+## Architecture (Clean + Feature-first)
 
+```text
 lib/
 ├── core/                  # Shared utilities, base classes, errors, constants, DI setup
 ├── features/
