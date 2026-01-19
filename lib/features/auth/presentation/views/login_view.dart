@@ -12,6 +12,8 @@ import 'package:online_exam/features/auth/presentation/widgets/create_account_or
 import 'package:online_exam/features/auth/presentation/widgets/remember_me_and_forget_widget.dart';
 import 'package:online_exam/features/home/presentation/view/app_section.dart';
 
+import '../../../home/presentation/widgets/home_screen.dart';
+
 class LoginView extends StatefulWidget {
   static const String routeName = "LoginView";
   const LoginView({super.key});
@@ -40,6 +42,12 @@ class _LoginViewState extends State<LoginView> {
         password: _passwordController.text,
       );
     }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+    );
   }
 
   @override
@@ -97,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     CreateAccountOrHaveAccountWidget(
                       firstPartText: "Don't have an account? ",
-                      textButtonText: 'Sing Up',
+                      textButtonText: 'Sign Up',
                       onTab: () =>
                           Navigator.pushNamed(context, SignUpView.routeName),
                     ),

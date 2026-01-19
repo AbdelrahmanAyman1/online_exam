@@ -28,7 +28,11 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginSuccessState(result.data));
         break;
       case Failure<AuthResponseModel>():
+<<<<<<< HEAD
         emit(LoginFailureState(result.exception.message));
+=======
+        emit(LoginFailureState(result.exception));
+>>>>>>> abc9914e9f1a0c272ac4bebfddc03bc2492805d9
         break;
     }
   }
