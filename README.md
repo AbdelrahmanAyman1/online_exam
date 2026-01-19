@@ -62,3 +62,13 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 # 4. Run the app
 flutter run
+
+Useful Commands
+# Full clean + regenerate
+flutter clean && flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+
+# Run tests
+flutter test
+
+# Analyze code
+flutter analyze
