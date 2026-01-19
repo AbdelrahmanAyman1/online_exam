@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/core/utils/result.dart';
+import 'package:online_exam/core/api/result.dart';
 import 'package:online_exam/features/auth/data/model/sign_up_request.dart';
 import 'package:online_exam/features/auth/domain/model/sign_up_response_model.dart';
 import 'package:online_exam/features/auth/domain/usecase/sign_up_usecase.dart';
@@ -37,9 +37,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     switch (result) {
       case Success<AuthResponseModel>():
         emit(SignUpSuccessState(result.data));
-
       case Failure<AuthResponseModel>():
-        emit(SignUpFailureState(result.exception));
+        emit(SignUpFailureState(result.exception.message));
     }
   }
 }

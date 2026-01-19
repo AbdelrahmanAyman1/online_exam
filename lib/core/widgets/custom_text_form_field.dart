@@ -14,6 +14,9 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.suffixIcon,
     this.enabled,
+    this.suffix,
+    this.readOnly,
+    this.suffixStyle,
   });
   final String hintText;
   final String labelText;
@@ -24,6 +27,9 @@ class CustomTextFormField extends StatelessWidget {
   final bool? enabled;
   final TextEditingController? controller;
   final Widget? suffixIcon;
+  final Widget? suffix;
+  final TextStyle? suffixStyle;
+  final bool? readOnly;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -33,15 +39,17 @@ class CustomTextFormField extends StatelessWidget {
       onChanged: onChanged,
       enabled: enabled,
       controller: controller,
-
+      readOnly: readOnly ?? false,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
+
+        suffixStyle: suffixStyle,
         hintText: hintText,
         labelText: labelText,
         floatingLabelAlignment: FloatingLabelAlignment.start,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-
+        suffix: suffix,
         labelStyle: TextStyles.regular13.copyWith(color: AppColors.blackBase),
         hintStyle: TextStyles.regular14.copyWith(color: AppColors.blackBase),
         errorStyle: TextStyles.regular13.copyWith(color: AppColors.error),

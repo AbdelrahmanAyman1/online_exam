@@ -10,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # UI
+  
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.2.1
   flutter_native_splash: ^2.4.7
@@ -21,26 +20,31 @@ dependencies:
   retrofit: ^4.6.0
   json_annotation: ^4.9.0
   pretty_dio_logger: ^1.4.0
-  logger: ^2.6.0
-
-  # State Management & DI
-  flutter_bloc: ^9.1.1
-  get_it: ^7.7.0
-  injectable: ^2.4.1
-dartz: ^0.10.1
-
+  
+  # add get_it  
+  get_it: ^7.6.0
+  flutter_bloc: 
+  skeletonizer: ^2.1.0+1
+  flutter_secure_storage: ^9.2.4
+  envied: ^1.3.1
+  injectable:
+  
+  equatable: ^2.0.7
+  percent_indicator: ^4.2.5
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # Code generation
-  build_runner: ^2.6.0
+  bloc_test: 
+  mockito: 
   retrofit_generator: ^10.0.1
+  build_runner: ^2.7.1
   json_serializable: ^6.10.0
-  injectable_generator: ^2.4.1
+
 
   # Lints
   flutter_lints: ^6.0.0
+  injectable_generator: 
+  envied_generator: ^1.3.1
 
 flutter:
   uses-material-design: true
