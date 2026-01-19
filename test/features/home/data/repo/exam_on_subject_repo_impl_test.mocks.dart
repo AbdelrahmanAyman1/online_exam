@@ -12,6 +12,8 @@ import 'package:online_exam/features/home/data/datasourse/remote_data_sourse.dar
     as _i2;
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart'
     as _i5;
+import 'package:online_exam/features/home/domain/entity/subjects_model.dart'
+    as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,11 +29,11 @@ import 'package:online_exam/features/home/domain/entity/exams_entity.dart'
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [RemoteDataSourse].
+/// A class which mocks [RemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoteDataSourse extends _i1.Mock implements _i2.RemoteDataSource {
-  MockRemoteDataSourse() {
+class MockRemoteDataSource extends _i1.Mock implements _i2.RemoteDataSource {
+  MockRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -49,4 +51,17 @@ class MockRemoteDataSourse extends _i1.Mock implements _i2.RemoteDataSource {
             ),
           )
           as _i3.Future<_i4.Result<List<_i5.ExamsEntity>>>);
+
+  @override
+  _i3.Future<_i4.Result<List<_i7.SubjectsModel>>> getAllExams() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAllExams, []),
+            returnValue: _i3.Future<_i4.Result<List<_i7.SubjectsModel>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i7.SubjectsModel>>>(
+                this,
+                Invocation.method(#getAllExams, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i7.SubjectsModel>>>);
 }

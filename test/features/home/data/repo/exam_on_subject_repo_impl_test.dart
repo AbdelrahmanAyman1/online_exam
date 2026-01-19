@@ -16,7 +16,7 @@ void main() {
   late HomeRepo examRepo;
 
   setUp(() {
-    mockDataSourse = MockRemoteDataSourse();
+    mockDataSourse = MockRemoteDataSource();
     examRepo = HomeRepoImpl(mockDataSourse);
   });
   test(

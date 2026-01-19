@@ -39,7 +39,7 @@ dev_dependencies:
   retrofit_generator: ^10.0.1
   build_runner: ^2.7.1
   json_serializable: ^6.10.0
-  injectable_generator: ^2.4.1
+
 
   # Lints
   flutter_lints: ^6.0.0

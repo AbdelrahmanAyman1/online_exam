@@ -42,8 +42,12 @@ import '../../features/home/data/datasourse/remote_data_sourse_impl.dart'
     as _i542;
 import '../../features/home/data/repo/exam_on_subject_repo_impl.dart' as _i521;
 import '../../features/home/domain/repo/get_exam_on_subject_repo.dart' as _i377;
+import '../../features/home/domain/usecase/get_all_subjects_use_case.dart'
+    as _i871;
 import '../../features/home/domain/usecase/get_exam_on_subject_usecase.dart'
     as _i685;
+import '../../features/home/domain/usecase/get_subjects_usecase.dart' as _i1011;
+import '../../features/home/presentation/cubit/home_cubit.dart' as _i9;
 import '../../features/home/presentation/view_model/get_all_exam_by_subject/exam_view_model.dart'
     as _i1035;
 import '../../features/profile/data/datasourse/remote_profile_data_sourse.dart'
@@ -91,6 +95,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i528.PrettyDioLogger>(),
       ),
     );
+    gh.factory<_i9.HomeCubit>(
+      () => _i9.HomeCubit(gh<_i1011.GetSubjectsUseCase>()),
+    );
     gh.lazySingleton<_i277.ApiClient>(
       () => apiModule.provideApiClient(gh<_i361.Dio>()),
     );
@@ -108,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i269.QuestionsDataSource>(
       () => _i161.QuestionsDataSourceImpl(gh<_i277.ApiClient>()),
+    );
+    gh.lazySingleton<_i377.HomeRepo>(
+      () => _i521.HomeRepoImpl(gh<_i617.RemoteDataSource>()),
     );
     gh.lazySingleton<_i364.ProfileRepo>(
       () => _i256.ProfileRepoImpl(gh<_i62.RemoteProfileDataSourse>()),
@@ -127,9 +137,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i609.ResetPasswordCubit>(
       () => _i609.ResetPasswordCubit(gh<_i878.ResetPasswordUseCase>()),
     );
-    gh.lazySingleton<_i377.HomeRepo>(
-      () => _i521.HomeRepoImpl(gh<_i617.RemoteDataSource>()),
-    );
     gh.lazySingleton<_i87.EditProfileInfoUcecase>(
       () => _i87.EditProfileInfoUcecase(gh<_i364.ProfileRepo>()),
     );
@@ -139,6 +146,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i501.ChangePasswordUseCase>(
       () => _i501.ChangePasswordUseCase(gh<_i364.ProfileRepo>()),
     );
+    gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
+      () => _i685.GetExamOnSubjectUsecase(gh<_i377.HomeRepo>()),
+    );
     gh.factory<_i1043.ForgetPasswordCubit>(
       () => _i1043.ForgetPasswordCubit(gh<_i16.ForgetPasswordUseCase>()),
     );
@@ -147,6 +157,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i406.ExamPageRepo>(
       () => _i500.ExamPageRepoImpl(gh<_i269.QuestionsDataSource>()),
+    );
+    gh.factory<_i871.GetAllSubjectsUseCase>(
+      () => _i871.GetAllSubjectsUseCase(gh<_i377.HomeRepo>()),
     );
     gh.factory<_i451.VerifyResetCodeCubit>(
       () => _i451.VerifyResetCodeCubit(gh<_i1040.VerifyResetCodeUseCase>()),
@@ -163,6 +176,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1061.GetQuestionsUseCase>(
       () => _i1061.GetQuestionsUseCase(gh<_i406.ExamPageRepo>()),
     );
+    gh.factory<_i1035.ExamViewModel>(
+      () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),
+    );
     gh.factory<_i518.ProfileViewModel>(
       () => _i518.ProfileViewModel(
         gh<_i859.GetProfileInfoUcecase>(),
@@ -170,17 +186,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i501.ChangePasswordUseCase>(),
       ),
     );
-    gh.lazySingleton<_i685.GetExamOnSubjectUsecase>(
-      () => _i685.GetExamOnSubjectUsecase(gh<_i377.HomeRepo>()),
-    );
     gh.factory<_i384.ExamPageCubit>(
       () => _i384.ExamPageCubit(
         gh<_i1061.GetQuestionsUseCase>(),
         gh<_i561.CheckQuestionsUseCase>(),
       ),
-    );
-    gh.factory<_i1035.ExamViewModel>(
-      () => _i1035.ExamViewModel(gh<_i685.GetExamOnSubjectUsecase>()),
     );
     return this;
   }

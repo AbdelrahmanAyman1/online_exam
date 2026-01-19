@@ -10,6 +10,8 @@ import 'package:mockito/src/dummies.dart' as _i6;
 import 'package:online_exam/core/api/result.dart' as _i4;
 import 'package:online_exam/features/home/domain/entity/exams_entity.dart'
     as _i5;
+import 'package:online_exam/features/home/domain/entity/subjects_model.dart'
+    as _i7;
 import 'package:online_exam/features/home/domain/repo/get_exam_on_subject_repo.dart'
     as _i2;
 
@@ -27,11 +29,11 @@ import 'package:online_exam/features/home/domain/repo/get_exam_on_subject_repo.d
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [ExamRepo].
+/// A class which mocks [HomeRepo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockExamRepo extends _i1.Mock implements _i2.HomeRepo {
-  MockExamRepo() {
+class MockHomeRepo extends _i1.Mock implements _i2.HomeRepo {
+  MockHomeRepo() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -49,4 +51,17 @@ class MockExamRepo extends _i1.Mock implements _i2.HomeRepo {
             ),
           )
           as _i3.Future<_i4.Result<List<_i5.ExamsEntity>>>);
+
+  @override
+  _i3.Future<_i4.Result<List<_i7.SubjectsModel>>> getAllSubjects() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAllSubjects, []),
+            returnValue: _i3.Future<_i4.Result<List<_i7.SubjectsModel>>>.value(
+              _i6.dummyValue<_i4.Result<List<_i7.SubjectsModel>>>(
+                this,
+                Invocation.method(#getAllSubjects, []),
+              ),
+            ),
+          )
+          as _i3.Future<_i4.Result<List<_i7.SubjectsModel>>>);
 }

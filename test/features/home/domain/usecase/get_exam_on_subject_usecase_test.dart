@@ -14,7 +14,7 @@ void main() {
   late HomeRepo mockExamRepo;
   late GetExamOnSubjectUsecase getExamUsecase;
   setUp(() {
-    mockExamRepo = MockExamRepo();
+    mockExamRepo = MockHomeRepo();
     getExamUsecase = GetExamOnSubjectUsecase(mockExamRepo);
   });
   test(
