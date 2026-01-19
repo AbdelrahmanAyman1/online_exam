@@ -13,11 +13,12 @@ A modern, scalable Flutter application for conducting and taking online examinat
 Cross-platform mobile app that enables:
 
 - Students → browse subjects, take timed exams
-- Teachers/Admins → create & manage exams and questions
+- Manage exams and questions
 - Secure authentication with role-based access
 - API integration, automatic grading & results (in progress)
 
 ## Architecture (Clean + Feature-first)
+
 lib/
 ├── core/                  # Shared utilities, base classes, errors, constants, DI setup
 ├── features/
