@@ -1,6 +1,11 @@
 # Online Exam App
 
 [![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/AbdelrahmanAyman1/online_exam)
+[![Flutter](https://img.shields.io/badge/Flutter-≥3.0-blue?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-≥3.0-blue?logo=dart&logoColor=white)](https://dart.dev)
+[![Architecture](https://img.shields.io/badge/Clean%20Architecture-✓-success)](#architecture)
+[![State Management](https://img.shields.io/badge/Bloc-orange)](#tech-stack)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An online examination application built with Flutter, designed for scalability and maintainability using Clean Architecture and a feature-first project structure.
 
