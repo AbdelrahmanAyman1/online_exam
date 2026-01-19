@@ -1,16 +1,20 @@
-# online_exam
+# Online Exam App
 
-A new Flutter project.
+A modern Flutter application for creating and taking online examinations — built with Clean Architecture, strong dependency injection, and production-ready practices.
 
-## Getting Started
+[![Flutter](https://img.shields.io/badge/Flutter-≥3.8-blue?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-≥3.8-blue?logo=dart&logoColor=white)](https://dart.dev)
+[![Clean Architecture](https://img.shields.io/badge/Clean%20Architecture-✓-success)](#architecture)
+[![State Management](https://img.shields.io/badge/Bloc-orange)](#tech-stack)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-This project is a starting point for a Flutter application.
+## Overview
 
-A few resources to get you started if this is your first Flutter project:
+Cross-platform mobile app that enables:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Students to take timed exams with various question types
+- Teachers/Admins to create, edit, and manage exams & questions
+- Secure authentication with role-based access
+- Automatic grading and performance analytics
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Architecture (Clean Architecture + Feature-first)
